@@ -1,5 +1,9 @@
 package fr.pizzeria.model;
 
+/**
+ * @author hmerciol
+ *
+ */
 public class Pizza {
 
 	public static Integer lastId;

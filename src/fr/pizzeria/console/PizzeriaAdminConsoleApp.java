@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import fr.pizzeria.model.*;
 
+/**
+ * @author hmerciol
+ *
+ */
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
@@ -14,6 +18,8 @@ public class PizzeriaAdminConsoleApp {
 		Pizza.lastId = -1;
 
 		// instanciation du tableau des pizzas de base
+
+		// avec ArrayList :
 		// ArrayList<Pizza> menu = new ArrayList<Pizza>();
 		// menu.add(new Pizza("PEP", "Pépéroni", 12.50));
 		// menu.add(new Pizza("MAR", "Margherita", 14.00));
@@ -23,6 +29,8 @@ public class PizzeriaAdminConsoleApp {
 		// menu.add(new Pizza("SAV", "La savoyarde", 13.00));
 		// menu.add(new Pizza("ORI", "L\'orientale", 13.50));
 		// menu.add(new Pizza("IND", "L\'indienne", 14.00));
+
+		// avec tableau
 		Pizza[] menuTable = new Pizza[8];
 		menuTable[0] = (new Pizza("PEP", "Pépéroni", 12.50));
 		menuTable[1] = (new Pizza("MAR", "Margherita", 14.00));
@@ -53,24 +61,24 @@ public class PizzeriaAdminConsoleApp {
 
 			case 2:
 				System.out.println("Ajout d\'une nouvelle pizza");
-				// menu.add(nouvellePizza(scan));
-				menuTable = nouvellePizza(scan, menuTable);
+				// menu.add(nouvellePizza(scan));	//avec ArrayList
+				menuTable = nouvellePizza(scan, menuTable);	//avec tableaux
 				break;
 
 			case 3:
 				System.out.println("Mise à jour d\'une pizza");
-				// afficheListe(menu);
-				// changerPizza(scan, menu);
-				afficheListe(menuTable);
-				changerPizza(scan, menuTable);
+				// afficheListe(menu);	//avec ArrayList
+				// changerPizza(scan, menu);	//avec ArrayList
+				afficheListe(menuTable);	//avec tableaux
+				changerPizza(scan, menuTable);	//avec tableaux
 				break;
 
 			case 4:
 				System.out.println("Suppression d\'une pizza");
-				// afficheListe(menu);
-				// retirerPizza(scan, menu);
-				afficheListe(menuTable);
-				menuTable=retirerPizza(scan, menuTable);
+				// afficheListe(menu);	//avec ArrayList
+				// retirerPizza(scan, menu);	//avec ArrayList
+				afficheListe(menuTable);	//avec tableaux
+				menuTable = retirerPizza(scan, menuTable);	//avec tableaux
 				break;
 
 			case 99:
@@ -87,7 +95,10 @@ public class PizzeriaAdminConsoleApp {
 		scan.close();
 	}
 
-	// affiche la liste des pizzas du menu
+	/**
+	 * Affiche la liste (ArrayList) des pizzas du menu
+	 * @param menu
+	 */
 	public static void afficheListe(ArrayList<Pizza> menu) {
 		DecimalFormat formatter = new DecimalFormat("#.00");
 		for (Pizza element : menu) {
@@ -96,7 +107,10 @@ public class PizzeriaAdminConsoleApp {
 		}
 	}
 
-	// version avec tableau
+	/**
+	 * Affiche la liste (tableau Pizza[]) des pizzas du menu
+	 * @param menuTable
+	 */
 	public static void afficheListe(Pizza[] menuTable) {
 		DecimalFormat formatter = new DecimalFormat("#.00");
 		for (Pizza element : menuTable) {
@@ -105,7 +119,11 @@ public class PizzeriaAdminConsoleApp {
 		}
 	}
 
-	// création d'une nouvelle pizza
+	/**
+	 * Création d'une nouvelle pizza
+	 * @param scan
+	 * @return pizza
+	 */
 	public static Pizza nouvellePizza(Scanner scan) {
 		System.out.println("Veuillez saisir le code");
 		String code = scan.next();
@@ -117,7 +135,12 @@ public class PizzeriaAdminConsoleApp {
 		return new Pizza(code, nom, prix);
 	}
 
-	// version avec tableau
+	/**
+	 * Augmentation d'un tableau de pizzas d'une nouvelle pizza
+	 * @param scan
+	 * @param menuTable
+	 * @return menuTable
+	 */
 	public static Pizza[] nouvellePizza(Scanner scan, Pizza[] menuTable) {
 		System.out.println("Veuillez saisir le code");
 		String code = scan.next();
@@ -135,7 +158,11 @@ public class PizzeriaAdminConsoleApp {
 		return newMenu;
 	}
 
-	// mise à jour d'une pizza
+	/**
+	 * Mise à jour d'une pizza dans une liste (ArrayList)
+	 * @param scan
+	 * @param menu
+	 */
 	public static void changerPizza(Scanner scan, ArrayList<Pizza> menu) {
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		System.out.println("(99 pour abandonner).");
@@ -157,7 +184,11 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("Pizza non trouvée");
 	}
 
-	// version avec tableau
+	/**
+	 * Mise à jour d'une pizza dans un tableau
+	 * @param scan
+	 * @param menuTable
+	 */
 	public static void changerPizza(Scanner scan, Pizza[] menuTable) {
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		System.out.println("(99 pour abandonner).");
@@ -179,7 +210,11 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("Pizza non trouvée");
 	}
 
-	// suppression d'une pizza
+	/**
+	 * Suppression d'une pizza dans une liste (ArrayList)
+	 * @param scan
+	 * @param menu
+	 */
 	public static void retirerPizza(Scanner scan, ArrayList<Pizza> menu) {
 		System.out.println("Veuillez choisir la pizza à supprimer.");
 		System.out.println("(99 pour abandonner).");
@@ -196,7 +231,12 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("Pizza non trouvée");
 	}
 
-	// version avec tableau
+	/**
+	 * Suppression d'une pizza dans un tableau
+	 * @param scan
+	 * @param menuTable
+	 * @return menuTable
+	 */
 	public static Pizza[] retirerPizza(Scanner scan, Pizza[] menuTable) {
 		System.out.println("Veuillez choisir la pizza à supprimer.");
 		System.out.println("(99 pour abandonner).");
@@ -210,9 +250,9 @@ public class PizzeriaAdminConsoleApp {
 				removed = true;
 				continue;
 			}
-			newMenu[removed?i-1:i]=menuTable[i];
+			newMenu[removed ? i - 1 : i] = menuTable[i];
 		}
-		
+
 		return newMenu;
 	}
 
