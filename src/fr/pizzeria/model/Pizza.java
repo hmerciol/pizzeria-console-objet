@@ -2,14 +2,15 @@ package fr.pizzeria.model;
 
 public class Pizza {
 
+	public static Integer lastId;
 	private Integer id;
 	private String code;
 	private String nom;
 	private double prix;
 	
-	public Pizza(Integer id, String code, String nom, double prix) {
+	public Pizza(String code, String nom, double prix) {
 		super();
-		this.id = id;
+		this.id = ++lastId;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
