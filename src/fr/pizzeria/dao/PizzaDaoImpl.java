@@ -2,6 +2,10 @@ package fr.pizzeria.dao;
 
 import fr.pizzeria.model.Pizza;
 
+/**
+ * @author hmerciol
+ *
+ */
 public class PizzaDaoImpl implements IPizzaDao {
 	
 	Pizza[] menuPizzas = new Pizza[0];

@@ -21,6 +21,9 @@ public class MenuPizzeria {
 		actions[3] = new SupprimerPizzaOptionMenu();
 	}
 
+	/**
+	 * Affiche en console les options en lignes de commande
+	 */
 	public void afficher() {
 		System.out.println("***** Pizzeria Administration *****");
 		int indice = 1;
@@ -31,6 +34,13 @@ public class MenuPizzeria {
 		System.out.println("99. Sortir");
 	}
 
+	/**
+	 * Exécute une option du menu
+	 * @param indice
+	 * @param menuTable
+	 * @param scan
+	 * @return
+	 */
 	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) {
 		return actions[indice-1].execute(menuTable, scan);
 	}
