@@ -23,6 +23,7 @@ public class PizzeriaAdminConsoleApp {
 		menu.add(new Pizza(idPizzas++, "ORI", "L\'orientale", 13.50));
 		menu.add(new Pizza(idPizzas++, "IND", "L\'indienne", 14.00));
 		
+		//console
 		while(on) {
 			System.out.println("***** Pizzeria Administration *****");
 			System.out.println("1. Lister les pizzas");
