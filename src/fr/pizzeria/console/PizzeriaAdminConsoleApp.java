@@ -25,13 +25,13 @@ public class PizzeriaAdminConsoleApp {
 		// menu.add(new Pizza("IND", "L\'indienne", 14.00));
 		Pizza[] menuTable = new Pizza[8];
 		menuTable[0] = (new Pizza("PEP", "Pépéroni", 12.50));
-		menuTable[0] = (new Pizza("MAR", "Margherita", 14.00));
-		menuTable[0] = (new Pizza("REIN", "La Reine", 11.50));
-		menuTable[0] = (new Pizza("FRO", "La 4 fromages", 12.00));
-		menuTable[0] = (new Pizza("CAN", "La cannibale", 12.50));
-		menuTable[0] = (new Pizza("SAV", "La savoyarde", 13.00));
-		menuTable[0] = (new Pizza("ORI", "L\'orientale", 13.50));
-		menuTable[0] = (new Pizza("IND", "L\'indienne", 14.00));
+		menuTable[1] = (new Pizza("MAR", "Margherita", 14.00));
+		menuTable[2] = (new Pizza("REIN", "La Reine", 11.50));
+		menuTable[3] = (new Pizza("FRO", "La 4 fromages", 12.00));
+		menuTable[4] = (new Pizza("CAN", "La cannibale", 12.50));
+		menuTable[5] = (new Pizza("SAV", "La savoyarde", 13.00));
+		menuTable[6] = (new Pizza("ORI", "L\'orientale", 13.50));
+		menuTable[7] = (new Pizza("IND", "L\'indienne", 14.00));
 
 		// console
 		while (on) {
