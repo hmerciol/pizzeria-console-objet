@@ -70,7 +70,7 @@ public class PizzeriaAdminConsoleApp {
 				// afficheListe(menu);
 				// retirerPizza(scan, menu);
 				afficheListe(menuTable);
-				retirerPizza(scan, menuTable);
+				menuTable=retirerPizza(scan, menuTable);
 				break;
 
 			case 99:
@@ -130,7 +130,7 @@ public class PizzeriaAdminConsoleApp {
 		for (int i = 0; i < menuTable.length; i++) {
 			newMenu[i] = menuTable[i];
 		}
-		newMenu[menuTable.length + 1] = new Pizza(code, nom, prix);
+		newMenu[menuTable.length] = new Pizza(code, nom, prix);
 
 		return newMenu;
 	}
@@ -197,7 +197,7 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	// version avec tableau
-	public static void retirerPizza(Scanner scan, Pizza[] menuTable) {
+	public static Pizza[] retirerPizza(Scanner scan, Pizza[] menuTable) {
 		System.out.println("Veuillez choisir la pizza à supprimer.");
 		System.out.println("(99 pour abandonner).");
 
@@ -212,6 +212,8 @@ public class PizzeriaAdminConsoleApp {
 			}
 			newMenu[removed?i-1:i]=menuTable[i];
 		}
+		
+		return newMenu;
 	}
 
 }
