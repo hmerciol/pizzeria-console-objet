@@ -2,7 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.dao.IPizzaDao;
 
 /**
  * @author hmerciol
@@ -18,9 +18,9 @@ public abstract class OptionMenu {
 	
 	/**
 	 * Pour exécuter la commande corespondante
-	 * @param menuTable
+	 * @param menuPizzeria
 	 * @param scan
 	 * @return
 	 */
-	public abstract Pizza[] execute(Pizza[] menuTable, Scanner scan);
+	public abstract boolean execute(IPizzaDao menuPizzeria, Scanner scan);
 }

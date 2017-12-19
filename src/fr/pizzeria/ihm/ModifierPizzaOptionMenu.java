@@ -2,6 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -16,7 +17,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
+	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) {
 		System.out.println("Mise à jour d\'une pizza");
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		System.out.println("(99 pour abandonner).");
@@ -24,20 +25,16 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String codeOld = scan.next();
 
 		if (codeOld.equals("99"))
-			return menuTable;
+			return false;
 
-		for (Pizza courant : menuTable) {
-			if (codeOld.equals(courant.getCode())) {
-				System.out.println("Veuillez saisir le code");
-				courant.setCode(scan.next());
-				System.out.println("Veuillez saisir le nom (sans espace)");
-				courant.setNom(scan.next());
-				System.out.println("Veuillez saisir le prix");
-				courant.setPrix(scan.nextDouble());
-			}
-		}
+		System.out.println("Veuillez saisir le code");
+		String code = scan.next();
+		System.out.println("Veuillez saisir le nom (sans espace)");
+		String nom = scan.next();
+		System.out.println("Veuillez saisir le prix");
+		double prix = scan.nextDouble();
 
-		return menuTable;
+		return menuPizzeria.updatePizza(codeOld, new Pizza(code, nom, prix));
 	}
 
 }

@@ -2,7 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.dao.IPizzaDao;
 
 /**
  * @author hmerciol
@@ -16,7 +16,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
+	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) {
 		System.out.println("Suppression d\'une pizza");
 		System.out.println("Veuillez choisir la pizza à supprimer.");
 		System.out.println("(99 pour abandonner).");
@@ -24,20 +24,9 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		String codeSuppr = scan.next();
 
 		if (codeSuppr.equals("99"))
-			return menuTable;
+			return false;
 
-		Pizza[] newMenu = new Pizza[menuTable.length - 1];
-		boolean removed = false;
-
-		for (int i = 0; i < menuTable.length; i++) {
-			if (codeSuppr.equals(menuTable[i].getCode())) {
-				removed = true;
-				continue;
-			}
-			newMenu[removed ? i - 1 : i] = menuTable[i];
-		}
-
-		return newMenu;
+		return menuPizzeria.deletePizza(codeSuppr);
 	}
 
 }

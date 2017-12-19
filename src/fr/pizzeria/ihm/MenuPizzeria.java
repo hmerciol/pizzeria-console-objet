@@ -2,7 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.dao.IPizzaDao;
 
 /**
  * @author hmerciol
@@ -31,7 +31,7 @@ public class MenuPizzeria {
 		System.out.println("99. Sortir");
 	}
 
-	public Pizza[] executeMenu(int indice, Pizza[] menuTable, Scanner scan) {
+	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) {
 		return actions[indice-1].execute(menuTable, scan);
 	}
 }

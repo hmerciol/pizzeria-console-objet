@@ -3,6 +3,7 @@ package fr.pizzeria.ihm;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -17,14 +18,15 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
+	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) {
 		System.out.println("Liste des pizzas");
 		DecimalFormat formatter = new DecimalFormat("#.00");
-		for (Pizza element : menuTable) {
+		Pizza[] menuPizza = menuPizzeria.findAllPizzas();
+		for (Pizza element : menuPizza) {
 			System.out.println(
 					element.getCode() + " -> " + element.getNom() + " (" + formatter.format(element.getPrix()) + " €)");
 		}
-		return menuTable;
+		return true;
 	}
 
 }
