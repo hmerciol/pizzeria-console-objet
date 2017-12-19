@@ -36,7 +36,7 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("Au revoir :(");
 				on = false;
 			}else {
-				console.executeMenu(instruction, menuTable, scan);
+				menuTable = console.executeMenu(instruction, menuTable, scan);
 			}
 		}
 

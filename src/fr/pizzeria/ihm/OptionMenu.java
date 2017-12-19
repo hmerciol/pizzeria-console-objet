@@ -22,5 +22,5 @@ public abstract class OptionMenu {
 	 * @param scan
 	 * @return
 	 */
-	public abstract boolean execute(Pizza[] menuTable, Scanner scan);
+	public abstract Pizza[] execute(Pizza[] menuTable, Scanner scan);
 }

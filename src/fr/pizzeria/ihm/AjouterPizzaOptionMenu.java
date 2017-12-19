@@ -12,7 +12,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute(Pizza[] menuTable, Scanner scan) {
+	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
 		System.out.println("Ajout d\'une nouvelle pizza");
 		System.out.println("Veuillez saisir le code");
 		String code = scan.next();
@@ -27,8 +27,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		}
 		newMenu[menuTable.length] = new Pizza(code, nom, prix);
 
-		menuTable = newMenu;
-		return true;
+		return newMenu;
 	}
 
 }

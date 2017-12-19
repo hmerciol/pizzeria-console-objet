@@ -16,7 +16,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute(Pizza[] menuTable, Scanner scan) {
+	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
 		System.out.println("Mise à jour d\'une pizza");
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		System.out.println("(99 pour abandonner).");
@@ -24,9 +24,8 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String codeOld = scan.next();
 
 		if (codeOld.equals("99"))
-			return false;
+			return menuTable;
 
-		boolean trouve = false;
 		for (Pizza courant : menuTable) {
 			if (codeOld.equals(courant.getCode())) {
 				System.out.println("Veuillez saisir le code");
@@ -35,11 +34,10 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				courant.setNom(scan.next());
 				System.out.println("Veuillez saisir le prix");
 				courant.setPrix(scan.nextDouble());
-				trouve = true;
 			}
 		}
 
-		return trouve;
+		return menuTable;
 	}
 
 }

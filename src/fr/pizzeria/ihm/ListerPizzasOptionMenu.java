@@ -17,14 +17,14 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute(Pizza[] menuTable, Scanner scan) {
+	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
 		System.out.println("Liste des pizzas");
 		DecimalFormat formatter = new DecimalFormat("#.00");
 		for (Pizza element : menuTable) {
 			System.out.println(
 					element.getCode() + " -> " + element.getNom() + " (" + formatter.format(element.getPrix()) + " €)");
 		}
-		return false;
+		return menuTable;
 	}
 
 }

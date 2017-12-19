@@ -16,7 +16,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute(Pizza[] menuTable, Scanner scan) {
+	public Pizza[] execute(Pizza[] menuTable, Scanner scan) {
 		System.out.println("Suppression d\'une pizza");
 		System.out.println("Veuillez choisir la pizza à supprimer.");
 		System.out.println("(99 pour abandonner).");
@@ -24,7 +24,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		String codeSuppr = scan.next();
 
 		if (codeSuppr.equals("99"))
-			return false;
+			return menuTable;
 
 		Pizza[] newMenu = new Pizza[menuTable.length - 1];
 		boolean removed = false;
@@ -37,8 +37,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 			newMenu[removed ? i - 1 : i] = menuTable[i];
 		}
 
-		menuTable = newMenu;
-		return removed;
+		return newMenu;
 	}
 
 }

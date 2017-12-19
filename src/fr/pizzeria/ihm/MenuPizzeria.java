@@ -31,7 +31,7 @@ public class MenuPizzeria {
 		System.out.println("99. Sortir");
 	}
 
-	public boolean executeMenu(int indice, Pizza[] menuTable, Scanner scan) {
+	public Pizza[] executeMenu(int indice, Pizza[] menuTable, Scanner scan) {
 		return actions[indice-1].execute(menuTable, scan);
 	}
 }
