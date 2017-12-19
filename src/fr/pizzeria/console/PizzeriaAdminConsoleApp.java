@@ -1,5 +1,6 @@
 package fr.pizzeria.console;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import fr.pizzeria.model.*;
@@ -75,7 +76,8 @@ public class PizzeriaAdminConsoleApp {
 	//affiche la liste des pizzas du menu
 	public static void afficheListe(ArrayList<Pizza> menu) {
 		for(Pizza element : menu) {
-			System.out.println(element.getCode()+" -> "+element.getNom()+" ("+element.getPrix()+" €)");
+			DecimalFormat formatter = new DecimalFormat("#.00");
+			System.out.println(element.getCode()+" -> "+element.getNom()+" ("+formatter.format(element.getPrix())+" €)");
 		}
 	}
 	
