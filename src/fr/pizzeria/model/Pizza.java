@@ -6,7 +6,7 @@ package fr.pizzeria.model;
  */
 public class Pizza {
 
-	public static Integer lastId;
+	private static int compteur=0;
 	private Integer id;
 	private String code;
 	private String nom;
@@ -14,7 +14,7 @@ public class Pizza {
 	
 	public Pizza(String code, String nom, double prix) {
 		super();
-		this.id = ++lastId;
+		this.id = compteur++;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
