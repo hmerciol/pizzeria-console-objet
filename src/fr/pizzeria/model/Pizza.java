@@ -1,5 +1,7 @@
 package fr.pizzeria.model;
 
+import java.text.DecimalFormat;
+
 /**
  * @author hmerciol
  *
@@ -31,12 +33,15 @@ public class Pizza {
 	 */
 	private double prix;
 
-	public Pizza(String code, String nom, double prix) {
+	private CategoriePizza categorie;
+
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
 		this.id = compteur++;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.categorie = categorie;
 	}
 
 	/**
@@ -73,6 +78,21 @@ public class Pizza {
 	 */
 	public double getPrix() {
 		return prix;
+	}
+
+	/**
+	 * Renvoie la catégorie de la pizza
+	 * 
+	 * @return La catégorie de la pizza
+	 */
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+
+	@Override
+	public String toString() {
+		DecimalFormat formatter = new DecimalFormat("#.00");
+		return code + " -> " + nom + " (" + formatter.format(prix) + " €), pizza " + categorie.getValue();
 	}
 
 }

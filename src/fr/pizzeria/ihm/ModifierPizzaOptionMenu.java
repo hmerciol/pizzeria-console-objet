@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -32,10 +33,12 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		String code = scan.next();
 		System.out.println("Veuillez saisir le nom (sans espace)");
 		String nom = scan.next();
+		System.out.println("Veuillez saisir la catégorie");
+		String categorie = scan.next();
 		System.out.println("Veuillez saisir le prix");
 		double prix = scan.nextDouble();
 
-		dao.updatePizza(codeOld, new Pizza(code, nom, prix));
+		dao.updatePizza(codeOld, new Pizza(code, nom, prix, CategoriePizza.valueOf(categorie)));
 	}
 
 }

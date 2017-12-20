@@ -34,16 +34,16 @@ public class PizzeriaAdminConsoleApp {
 		 * on = false;
 		 * }
 		 */
-		//version moins lourde en opérations
+		//version sans try and catch bloc
 		ArrayList<Pizza> menuTable = new ArrayList<Pizza>();
-		menuTable.add(new Pizza("PEP", "Pépéroni", 12.50));
-		menuTable.add(new Pizza("MAR", "Margherita", 14.00));
-		menuTable.add(new Pizza("REIN", "La Reine", 11.50));
-		menuTable.add(new Pizza("FRO", "La 4 fromages", 12.00));
-		menuTable.add(new Pizza("CAN", "La cannibale", 12.50));
-		menuTable.add(new Pizza("SAV", "La savoyarde", 13.00));
-		menuTable.add(new Pizza("ORI", "L\'orientale", 13.50));
-		menuTable.add(new Pizza("IND", "L\'indienne", 14.00));
+		menuTable.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
+		menuTable.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.VIANDE));
+		menuTable.add(new Pizza("REIN", "La Reine", 11.50, CategoriePizza.VIANDE));
+		menuTable.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
+		menuTable.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+		menuTable.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.SANS_VIANDE));
+		menuTable.add(new Pizza("ORI", "L\'orientale", 13.50, CategoriePizza.POISSON));
+		menuTable.add(new Pizza("IND", "L\'indienne", 14.00, CategoriePizza.POISSON));
 		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(menuTable);
 
 		MenuPizzeria console = new MenuPizzeria(scan, menuPizzeria);
