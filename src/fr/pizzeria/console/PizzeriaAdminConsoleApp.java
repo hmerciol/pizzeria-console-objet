@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.ihm.MenuPizzeria;
 import fr.pizzeria.model.*;
 
@@ -15,9 +14,7 @@ import fr.pizzeria.model.*;
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
-		boolean on = true;
 		Scanner scan = new Scanner(System.in);
-		int instruction;
 
 		// instanciation du tableau des pizzas de base
 		/*
@@ -50,22 +47,7 @@ public class PizzeriaAdminConsoleApp {
 		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(menuTable);
 
 		MenuPizzeria console = new MenuPizzeria(scan, menuPizzeria);
-
-		// début console
-		while (on) {
-			console.afficher();
-			instruction = scan.nextInt();
-			if (instruction == 99) {
-				System.out.println("Au revoir :(");
-				on = false;
-			} else {
-				try {
-					console.executeMenu(instruction);
-				} catch (StockageException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-		}
+		console.demarreConsole();
 
 		scan.close();
 	}
