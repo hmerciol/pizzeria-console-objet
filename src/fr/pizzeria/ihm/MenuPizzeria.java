@@ -23,9 +23,9 @@ public class MenuPizzeria {
 	 * Référence vers le scanner de la console
 	 */
 	private Scanner scan;
-	
+
 	/**
-	 * Vaut true tant que l'application tourne 
+	 * Vaut true tant que l'application tourne
 	 */
 	private boolean on = false;
 
@@ -74,6 +74,7 @@ public class MenuPizzeria {
 	 * @param indice
 	 *            Numéro de l'option du menu
 	 * @throws StockageException
+	 *             Envoyé en cas de mauvaise manipulation du menu des pizzas
 	 */
 	public void executeMenu(int indice) throws StockageException {
 		if (indice == 99) {

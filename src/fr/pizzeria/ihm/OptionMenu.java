@@ -15,12 +15,12 @@ public abstract class OptionMenu {
 	 * Libellé de l'option menu
 	 */
 	protected String libelle;
-	
+
 	/**
 	 * Référence vers le scanner de la console
 	 */
 	protected Scanner scan;
-	
+
 	/**
 	 * Référence vers le gestionnaire du menu des pizzas
 	 */
@@ -45,6 +45,7 @@ public abstract class OptionMenu {
 	 * Pour exécuter la commande corespondante
 	 * 
 	 * @throws StockageException
+	 *             Envoyé en cas de mauvaise manipulation du menu des pizzas
 	 */
 	public abstract void execute() throws StockageException;
 }
