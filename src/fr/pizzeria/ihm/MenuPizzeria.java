@@ -19,7 +19,14 @@ public class MenuPizzeria {
 	 */
 	private Map<Integer, OptionMenu> actions;
 
+	/**
+	 * Référence vers le scanner de la console
+	 */
 	private Scanner scan;
+	
+	/**
+	 * Vaut true tant que l'application tourne 
+	 */
 	private boolean on = false;
 
 	public MenuPizzeria(Scanner scan, IPizzaDao dao) {
@@ -44,6 +51,9 @@ public class MenuPizzeria {
 		System.out.println("99. Sortir");
 	}
 
+	/**
+	 * Démarrage de l'affichage console et traitement des instructions utilisateur
+	 */
 	public void demarreConsole() {
 		on = true;
 		int instruction;
