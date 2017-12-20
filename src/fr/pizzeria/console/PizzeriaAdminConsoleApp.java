@@ -33,6 +33,7 @@ public class PizzeriaAdminConsoleApp {
 		} catch (StockageException e) {
 			System.out.println("Erreur lors de l'initialisation du menu");
 			System.out.println(e.getMessage());
+			on = false;
 		}
 
 		// console
