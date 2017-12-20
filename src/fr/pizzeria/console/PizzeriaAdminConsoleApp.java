@@ -1,5 +1,6 @@
 package fr.pizzeria.console;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
@@ -37,15 +38,15 @@ public class PizzeriaAdminConsoleApp {
 		 * }
 		 */
 		//version moins lourde en opérations
-		Pizza[] menuTable = new Pizza[8];
-		menuTable[0] = (new Pizza("PEP", "Pépéroni", 12.50));
-		menuTable[1] = (new Pizza("MAR", "Margherita", 14.00));
-		menuTable[2] = (new Pizza("REIN", "La Reine", 11.50));
-		menuTable[3] = (new Pizza("FRO", "La 4 fromages", 12.00));
-		menuTable[4] = (new Pizza("CAN", "La cannibale", 12.50));
-		menuTable[5] = (new Pizza("SAV", "La savoyarde", 13.00));
-		menuTable[6] = (new Pizza("ORI", "L\'orientale", 13.50));
-		menuTable[7] = (new Pizza("IND", "L\'indienne", 14.00));
+		ArrayList<Pizza> menuTable = new ArrayList<Pizza>();
+		menuTable.add(new Pizza("PEP", "Pépéroni", 12.50));
+		menuTable.add(new Pizza("MAR", "Margherita", 14.00));
+		menuTable.add(new Pizza("REIN", "La Reine", 11.50));
+		menuTable.add(new Pizza("FRO", "La 4 fromages", 12.00));
+		menuTable.add(new Pizza("CAN", "La cannibale", 12.50));
+		menuTable.add(new Pizza("SAV", "La savoyarde", 13.00));
+		menuTable.add(new Pizza("ORI", "L\'orientale", 13.50));
+		menuTable.add(new Pizza("IND", "L\'indienne", 14.00));
 		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(menuTable);
 
 		MenuPizzeria console = new MenuPizzeria(scan, menuPizzeria);

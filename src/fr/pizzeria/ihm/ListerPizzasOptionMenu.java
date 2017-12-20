@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -21,7 +22,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	public void execute() {
 		System.out.println("Liste des pizzas");
 		DecimalFormat formatter = new DecimalFormat("#.00");
-		Pizza[] menu = dao.findAllPizzas();
+		List<Pizza> menu = dao.findAllPizzas();
 		for (Pizza element : menu) {
 			System.out.println(
 					element.getCode() + " -> " + element.getNom() + " (" + formatter.format(element.getPrix()) + " €)");
