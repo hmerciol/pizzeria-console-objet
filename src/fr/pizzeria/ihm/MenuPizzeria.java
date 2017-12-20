@@ -3,6 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 
 /**
  * @author hmerciol
@@ -41,7 +42,7 @@ public class MenuPizzeria {
 	 * @param scan
 	 * @return
 	 */
-	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) throws Exception {
+	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) throws StockageException {
 		return actions[indice-1].execute(menuTable, scan);
 	}
 }

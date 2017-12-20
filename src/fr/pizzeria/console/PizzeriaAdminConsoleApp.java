@@ -3,9 +3,7 @@ package fr.pizzeria.console;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.ihm.MenuPizzeria;
 import fr.pizzeria.model.*;
 
@@ -32,8 +30,9 @@ public class PizzeriaAdminConsoleApp {
 			menuPizzeria.saveNewPizza(new Pizza("SAV", "La savoyarde", 13.00));
 			menuPizzeria.saveNewPizza(new Pizza("ORI", "L\'orientale", 13.50));
 			menuPizzeria.saveNewPizza(new Pizza("IND", "L\'indienne", 14.00));
-		} catch (SavePizzaException e) {
+		} catch (StockageException e) {
 			System.out.println("Erreur lors de l'initialisation du menu");
+			System.out.println(e.getMessage());
 		}
 
 		// console
@@ -46,14 +45,8 @@ public class PizzeriaAdminConsoleApp {
 			} else {
 				try {
 					console.executeMenu(instruction, menuPizzeria, scan);
-				} catch (SavePizzaException e) {
-					System.out.println("Erreur lors de l'enregistrement de la pizza");
-				} catch (UpdatePizzaException e) {
-					System.out.println("Erreur lors de la mise à jour de la pizza");
-				} catch (DeletePizzaException e) {
-					System.out.println("Erreur lors de la suppression de la pizza");
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (StockageException e) {
+					System.out.println(e.getMessage());
 				}
 			}
 		}
