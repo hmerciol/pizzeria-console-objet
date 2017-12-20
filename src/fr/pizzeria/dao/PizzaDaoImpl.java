@@ -13,6 +13,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	Pizza[] menuPizzas = new Pizza[0];
 
+	public PizzaDaoImpl() {
+		super();
+	}
+
+	public PizzaDaoImpl(Pizza[] menuPizzas) {
+		super();
+		this.menuPizzas = menuPizzas;
+	}
+
 	@Override
 	public Pizza[] findAllPizzas() {
 		return menuPizzas;
