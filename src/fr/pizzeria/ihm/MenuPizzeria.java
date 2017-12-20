@@ -36,8 +36,8 @@ public class MenuPizzeria {
 	}
 
 	/**
-	 * Exécute une option du menu
-	 * @param indice
+	 * Exécute une option du menu en fonction de son identifiant
+	 * @param indice Numéro de l'option du menu
 	 * @throws StockageException
 	 */
 	public void executeMenu(int indice) throws StockageException {

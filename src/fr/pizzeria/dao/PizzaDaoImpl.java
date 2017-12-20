@@ -11,6 +11,9 @@ import fr.pizzeria.model.Pizza;
  */
 public class PizzaDaoImpl implements IPizzaDao {
 
+	/**
+	 * Liste des pizzas du menu
+	 */
 	Pizza[] menuPizzas = new Pizza[0];
 
 	public PizzaDaoImpl() {

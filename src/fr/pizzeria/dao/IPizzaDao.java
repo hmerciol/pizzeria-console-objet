@@ -33,7 +33,7 @@ public interface IPizzaDao {
 	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
 	
 	/**
-	 * Supprime une pizza du menu
+	 * Supprime une pizza du menu identifiée par son code
 	 * @param codePizza
 	 * @throws DeletePizzaException
 	 */

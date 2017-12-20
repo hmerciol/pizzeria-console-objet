@@ -11,8 +11,19 @@ import fr.pizzeria.exception.StockageException;
  */
 public abstract class OptionMenu {
 
+	/**
+	 * Libellé de l'option menu
+	 */
 	protected String libelle;
+	
+	/**
+	 * Référence vers le scanner de la console
+	 */
 	protected Scanner scan;
+	
+	/**
+	 * Référence vers le gestionnaire du menu des pizzas
+	 */
 	protected IPizzaDao dao;
 
 	public OptionMenu(Scanner scan, IPizzaDao dao) {

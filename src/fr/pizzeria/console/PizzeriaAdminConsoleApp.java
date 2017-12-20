@@ -19,21 +19,24 @@ public class PizzeriaAdminConsoleApp {
 		int instruction;
 
 		// instanciation du tableau des pizzas de base
-//		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl();
-//		try {
-//			menuPizzeria.saveNewPizza(new Pizza("PEP", "Pépéroni", 12.50));
-//			menuPizzeria.saveNewPizza(new Pizza("MAR", "Margherita", 14.00));
-//			menuPizzeria.saveNewPizza(new Pizza("REIN", "La Reine", 11.50));
-//			menuPizzeria.saveNewPizza(new Pizza("FRO", "La 4 fromages", 12.00));
-//			menuPizzeria.saveNewPizza(new Pizza("CAN", "La cannibale", 12.50));
-//			menuPizzeria.saveNewPizza(new Pizza("SAV", "La savoyarde", 13.00));
-//			menuPizzeria.saveNewPizza(new Pizza("ORI", "L\'orientale", 13.50));
-//			menuPizzeria.saveNewPizza(new Pizza("IND", "L\'indienne", 14.00));
-//		} catch (StockageException e) {
-//			System.out.println("Erreur lors de l'initialisation du menu");
-//			System.out.println(e.getMessage());
-//			on = false;
-//		}
+		/*
+		 * PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(); try {
+		 * menuPizzeria.saveNewPizza(new Pizza("PEP", "Pépéroni", 12.50));
+		 * menuPizzeria.saveNewPizza(new Pizza("MAR", "Margherita", 14.00));
+		 * menuPizzeria.saveNewPizza(new Pizza("REIN", "La Reine", 11.50));
+		 * menuPizzeria.saveNewPizza(new Pizza("FRO", "La 4 fromages", 12.00));
+		 * menuPizzeria.saveNewPizza(new Pizza("CAN", "La cannibale", 12.50));
+		 * menuPizzeria.saveNewPizza(new Pizza("SAV", "La savoyarde", 13.00));
+		 * menuPizzeria.saveNewPizza(new Pizza("ORI", "L\'orientale", 13.50));
+		 * menuPizzeria.saveNewPizza(new Pizza("IND", "L\'indienne", 14.00));
+		 * }
+		 * catch (StockageException e) {
+		 * System.out.println("Erreur lors de l'initialisation du menu");
+		 * System.out.println(e.getMessage());
+		 * on = false;
+		 * }
+		 */
+		//version moins lourde en opérations
 		Pizza[] menuTable = new Pizza[8];
 		menuTable[0] = (new Pizza("PEP", "Pépéroni", 12.50));
 		menuTable[1] = (new Pizza("MAR", "Margherita", 14.00));
@@ -44,10 +47,10 @@ public class PizzeriaAdminConsoleApp {
 		menuTable[6] = (new Pizza("ORI", "L\'orientale", 13.50));
 		menuTable[7] = (new Pizza("IND", "L\'indienne", 14.00));
 		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(menuTable);
-		
+
 		MenuPizzeria console = new MenuPizzeria(scan, menuPizzeria);
 
-		// console
+		// début console
 		while (on) {
 			console.afficher();
 			instruction = scan.nextInt();
