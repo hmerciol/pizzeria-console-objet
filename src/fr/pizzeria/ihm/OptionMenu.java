@@ -22,6 +22,7 @@ public abstract class OptionMenu {
 	 * @param menuPizzeria
 	 * @param scan
 	 * @return
+	 * @throws StockageException
 	 */
 	public abstract boolean execute(IPizzaDao menuPizzeria, Scanner scan) throws StockageException;
 }

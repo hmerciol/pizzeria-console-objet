@@ -41,6 +41,7 @@ public class MenuPizzeria {
 	 * @param menuTable
 	 * @param scan
 	 * @return
+	 * @throws StockageException
 	 */
 	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) throws StockageException {
 		return actions[indice-1].execute(menuTable, scan);

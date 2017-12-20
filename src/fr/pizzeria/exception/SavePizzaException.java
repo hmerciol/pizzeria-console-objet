@@ -1,5 +1,9 @@
 package fr.pizzeria.exception;
 
+/**
+ * @author hmerciol
+ *
+ */
 public class SavePizzaException extends StockageException {
 
 	/**
