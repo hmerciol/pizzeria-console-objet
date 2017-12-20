@@ -12,14 +12,14 @@ import fr.pizzeria.exception.StockageException;
 public class MenuPizzeria {
 
 	private OptionMenu[] actions;
-	
-	public MenuPizzeria() {
+
+	public MenuPizzeria(Scanner scan, IPizzaDao dao) {
 		super();
 		actions = new OptionMenu[4];
-		actions[0] = new ListerPizzasOptionMenu();
-		actions[1] = new AjouterPizzaOptionMenu();
-		actions[2] = new ModifierPizzaOptionMenu();
-		actions[3] = new SupprimerPizzaOptionMenu();
+		actions[0] = new ListerPizzasOptionMenu(scan, dao);
+		actions[1] = new AjouterPizzaOptionMenu(scan, dao);
+		actions[2] = new ModifierPizzaOptionMenu(scan, dao);
+		actions[3] = new SupprimerPizzaOptionMenu(scan, dao);
 	}
 
 	/**
@@ -28,8 +28,8 @@ public class MenuPizzeria {
 	public void afficher() {
 		System.out.println("***** Pizzeria Administration *****");
 		int indice = 1;
-		for(OptionMenu courant : actions) {
-			System.out.println(indice+". "+courant.getLibelle());
+		for (OptionMenu courant : actions) {
+			System.out.println(indice + ". " + courant.getLibelle());
 			indice++;
 		}
 		System.out.println("99. Sortir");
@@ -38,12 +38,9 @@ public class MenuPizzeria {
 	/**
 	 * Exécute une option du menu
 	 * @param indice
-	 * @param menuTable
-	 * @param scan
-	 * @return
 	 * @throws StockageException
 	 */
-	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) throws StockageException {
-		return actions[indice-1].execute(menuTable, scan);
+	public void executeMenu(int indice) throws StockageException {
+		actions[indice - 1].execute();
 	}
 }

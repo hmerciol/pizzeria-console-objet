@@ -20,26 +20,23 @@ public interface IPizzaDao {
 	/**
 	 * Ajoute une nouvelle pizza au menu
 	 * @param pizza
-	 * @return
 	 * @throws SavePizzaException
 	 */
-	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException;
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException;
 	
 	/**
 	 * Modifie une pizza du menu identifiée par son code
 	 * @param codePizza
 	 * @param pizza
-	 * @return
 	 * @throws UpdatePizzaException
 	 */
-	public boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
+	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
 	
 	/**
 	 * Supprime une pizza du menu
 	 * @param codePizza
-	 * @return
 	 * @throws DeletePizzaException
 	 */
-	public boolean deletePizza(String codePizza) throws DeletePizzaException;
+	public void deletePizza(String codePizza) throws DeletePizzaException;
 
 }

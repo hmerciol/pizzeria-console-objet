@@ -17,7 +17,6 @@ public class PizzeriaAdminConsoleApp {
 		boolean on = true;
 		Scanner scan = new Scanner(System.in);
 		int instruction;
-		MenuPizzeria console = new MenuPizzeria();
 
 		// instanciation du tableau des pizzas de base
 		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl();
@@ -36,6 +35,8 @@ public class PizzeriaAdminConsoleApp {
 			on = false;
 		}
 
+		MenuPizzeria console = new MenuPizzeria(scan, menuPizzeria);
+
 		// console
 		while (on) {
 			console.afficher();
@@ -45,7 +46,7 @@ public class PizzeriaAdminConsoleApp {
 				on = false;
 			} else {
 				try {
-					console.executeMenu(instruction, menuPizzeria, scan);
+					console.executeMenu(instruction);
 				} catch (StockageException e) {
 					System.out.println(e.getMessage());
 				}

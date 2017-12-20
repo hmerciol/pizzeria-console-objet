@@ -11,18 +11,29 @@ import fr.pizzeria.exception.StockageException;
  */
 public abstract class OptionMenu {
 
+	protected String libelle;
+	protected Scanner scan;
+	protected IPizzaDao dao;
+
+	public OptionMenu(Scanner scan, IPizzaDao dao) {
+		super();
+		this.scan = scan;
+		this.dao = dao;
+	}
+
 	/**
 	 * Pour obtenir le libellé d'une option dans le menu
+	 * 
 	 * @return libelle
 	 */
-	public abstract String getLibelle();
-	
+	public String getLibelle() {
+		return libelle;
+	}
+
 	/**
 	 * Pour exécuter la commande corespondante
-	 * @param menuPizzeria
-	 * @param scan
-	 * @return
+	 * 
 	 * @throws StockageException
 	 */
-	public abstract boolean execute(IPizzaDao menuPizzeria, Scanner scan) throws StockageException;
+	public abstract void execute() throws StockageException;
 }

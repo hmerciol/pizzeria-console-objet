@@ -12,13 +12,13 @@ import fr.pizzeria.model.Pizza;
  */
 public class AjouterPizzaOptionMenu extends OptionMenu {
 
-	@Override
-	public String getLibelle() {
-		return "Ajouter une nouvelle pizza";
+	public AjouterPizzaOptionMenu(Scanner scan, IPizzaDao dao) {
+		super(scan, dao);
+		libelle = "Ajouter une nouvelle pizza";
 	}
 
 	@Override
-	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) throws SavePizzaException {
+	public void execute() throws SavePizzaException {
 		System.out.println("Ajout d\'une nouvelle pizza");
 		System.out.println("Veuillez saisir le code");
 		String code = scan.next();
@@ -27,7 +27,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir le prix");
 		double prix = scan.nextDouble();
 
-		return menuPizzeria.saveNewPizza(new Pizza(code, nom, prix));
-		}
+		dao.saveNewPizza(new Pizza(code, nom, prix));
+	}
 
 }

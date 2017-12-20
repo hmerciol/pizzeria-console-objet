@@ -11,13 +11,13 @@ import fr.pizzeria.exception.DeletePizzaException;
  */
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 
-	@Override
-	public String getLibelle() {
-		return "Supprimer une pizza";
+	public SupprimerPizzaOptionMenu(Scanner scan, IPizzaDao dao) {
+		super(scan, dao);
+		libelle="Supprimer une pizza";
 	}
 
 	@Override
-	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) throws DeletePizzaException {
+	public void execute() throws DeletePizzaException {
 		System.out.println("Suppression d\'une pizza");
 		System.out.println("Veuillez choisir la pizza à supprimer.");
 		System.out.println("(99 pour abandonner).");
@@ -25,9 +25,9 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		String codeSuppr = scan.next();
 
 		if (codeSuppr.equals("99"))
-			return false;
+			return;
 
-		return menuPizzeria.deletePizza(codeSuppr);
+		dao.deletePizza(codeSuppr);
 	}
 
 }

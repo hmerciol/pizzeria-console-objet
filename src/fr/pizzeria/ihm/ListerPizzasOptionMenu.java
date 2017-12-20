@@ -12,21 +12,20 @@ import fr.pizzeria.model.Pizza;
  */
 public class ListerPizzasOptionMenu extends OptionMenu {
 
-	@Override
-	public String getLibelle() {
-		return "Lister les pizzas";
+	public ListerPizzasOptionMenu(Scanner scan, IPizzaDao dao) {
+		super(scan, dao);
+		libelle="Lister les pizzas";
 	}
 
 	@Override
-	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) {
+	public void execute() {
 		System.out.println("Liste des pizzas");
 		DecimalFormat formatter = new DecimalFormat("#.00");
-		Pizza[] menuPizza = menuPizzeria.findAllPizzas();
-		for (Pizza element : menuPizza) {
+		Pizza[] menu = dao.findAllPizzas();
+		for (Pizza element : menu) {
 			System.out.println(
 					element.getCode() + " -> " + element.getNom() + " (" + formatter.format(element.getPrix()) + " €)");
 		}
-		return true;
 	}
 
 }
