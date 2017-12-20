@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -16,7 +19,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean saveNewPizza(Pizza pizza) {
+	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
 		Pizza[] newMenu = new Pizza[menuPizzas.length + 1];
 		for (int i = 0; i < menuPizzas.length; i++) {
 			newMenu[i] = menuPizzas[i];
@@ -27,18 +30,18 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza pizza) {
+	public boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException{
 		for (int i = 0; i < menuPizzas.length; i++) {
 			if (menuPizzas[i].getCode().equals(codePizza)) {
 				menuPizzas[i]=pizza;
 				return true;
 			}
 		}
-		return false;
+		throw new UpdatePizzaException();
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
+	public boolean deletePizza(String codePizza) throws DeletePizzaException {
 
 		Pizza[] newMenu = new Pizza[menuPizzas.length - 1];
 		boolean removed = false;
@@ -48,11 +51,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 				removed = true;
 				continue;
 			}
+			
+			if (!removed && i==newMenu.length)
+				throw new DeletePizzaException();
+			
 			newMenu[removed ? i - 1 : i] = menuPizzas[i];
 		}
 		
 		menuPizzas=newMenu;
-		return removed;
+		return true;
 	}
 
 }

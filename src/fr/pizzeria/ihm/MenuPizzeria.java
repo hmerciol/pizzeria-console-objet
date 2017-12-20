@@ -41,7 +41,7 @@ public class MenuPizzeria {
 	 * @param scan
 	 * @return
 	 */
-	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) {
+	public boolean executeMenu(int indice, IPizzaDao menuTable, Scanner scan) throws Exception {
 		return actions[indice-1].execute(menuTable, scan);
 	}
 }

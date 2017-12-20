@@ -3,6 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -17,7 +18,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) {
+	public boolean execute(IPizzaDao menuPizzeria, Scanner scan) throws UpdatePizzaException {
 		System.out.println("Mise à jour d\'une pizza");
 		System.out.println("Veuillez choisir la pizza à modifier.");
 		System.out.println("(99 pour abandonner).");

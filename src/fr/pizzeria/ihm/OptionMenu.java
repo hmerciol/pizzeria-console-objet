@@ -22,5 +22,5 @@ public abstract class OptionMenu {
 	 * @param scan
 	 * @return
 	 */
-	public abstract boolean execute(IPizzaDao menuPizzeria, Scanner scan);
+	public abstract boolean execute(IPizzaDao menuPizzeria, Scanner scan) throws Exception;
 }
