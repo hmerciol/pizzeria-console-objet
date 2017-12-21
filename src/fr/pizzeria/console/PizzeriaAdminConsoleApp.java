@@ -3,6 +3,7 @@ package fr.pizzeria.console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import fr.pizzeria.dao.PizzaDaoFichier;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.MenuPizzeria;
 import fr.pizzeria.model.*;
@@ -45,7 +46,10 @@ public class PizzeriaAdminConsoleApp {
 		menuTable.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
 		menuTable.add(new Pizza("ORI", "L\'orientale", 13.50, CategoriePizza.VIANDE));
 		menuTable.add(new Pizza("IND", "L\'indienne", 14.00, CategoriePizza.VIANDE));
-		PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(menuTable);
+		
+		//choisir une des deux lignes ci-dessous
+		//PizzaDaoImpl menuPizzeria = new PizzaDaoImpl(menuTable);
+		PizzaDaoFichier menuPizzeria = new PizzaDaoFichier(menuTable); //version avec accès fichier
 
 		MenuPizzeria console = new MenuPizzeria(scan, menuPizzeria);
 		console.demarreConsole();

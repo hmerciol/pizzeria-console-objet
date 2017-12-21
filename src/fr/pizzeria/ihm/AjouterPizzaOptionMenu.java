@@ -25,8 +25,8 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		String code = scan.next();
 		System.out.println("Veuillez saisir le nom (sans espace)");
 		String nom = scan.next();
-		System.out.println("Veuillez saisir la catégorie (en majuscules)");
-		String categorie = scan.next();
+		System.out.println("Veuillez saisir la catégorie (avec \'_\' pour les espaces)");
+		String categorie = scan.next().toUpperCase();
 		System.out.println("Veuillez saisir le prix");
 		double prix = Double.parseDouble(scan.next());
 

@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
  * @author hmerciol
  *
  */
-public class Pizza {
+public class Pizza implements Comparable<Pizza> {
 
 	/**
 	 * Compteur servant à donner un identifiant unique à chaque pizza
@@ -42,6 +42,11 @@ public class Pizza {
 	 */
 	@ToString(categorie = true)
 	private CategoriePizza categorie;
+
+	/**
+	 * Séparateur pour le stockage dans le fichier
+	 */
+	private static String separator = " & ";
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
@@ -126,6 +131,29 @@ public class Pizza {
 			System.out.println("Problème lors de l'affichage du menu");
 		}
 		return chaine.toString();
+	}
+
+	@Override
+	public int compareTo(Pizza pizza) {
+		return code.compareTo(pizza.getCode());
+	}
+
+	/**
+	 * Renvoie les données de la pizza formatées pour le fichier
+	 * 
+	 * @return Un String contenant les données formatées
+	 */
+	public String getData() {
+		return code + separator + nom + separator + prix + separator + categorie.toString();
+	}
+
+	/**
+	 * Renvoie le séparateur
+	 * 
+	 * @return Le séparateur
+	 */
+	public static String getSeparator() {
+		return separator;
 	}
 
 }
