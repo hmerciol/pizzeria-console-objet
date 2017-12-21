@@ -7,6 +7,7 @@ import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.utils.PizzaValidator;
 
 /**
  * @author hmerciol
@@ -35,6 +36,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
+		if(!PizzaValidator.pizzaValide(pizza)) {
+			throw new SavePizzaException("Pizza non valide");
+		}
 		for (Pizza courant : menuPizzas) {
 			if (courant.getCode().equals(pizza.getCode())) {
 				throw new SavePizzaException("Code déjà utilisé, pizza non ajoutée");
@@ -45,6 +49,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
+		if(!PizzaValidator.pizzaValide(pizza)) {
+			throw new UpdatePizzaException("Pizza non valide");
+		}
 		boolean updated = false;
 		Pizza toDelete = null;
 		int at = -1;

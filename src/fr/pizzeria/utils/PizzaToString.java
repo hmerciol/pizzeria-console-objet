@@ -10,7 +10,7 @@ import fr.pizzeria.model.Pizza;
  * @author hmerciol
  *
  */
-public class PizzaToString {
+public abstract class PizzaToString {
 
 	/**
 	 * Séparateur pour le stockage dans le fichier

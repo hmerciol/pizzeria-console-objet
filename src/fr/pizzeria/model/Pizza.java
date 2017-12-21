@@ -1,6 +1,7 @@
 package fr.pizzeria.model;
 
 import fr.pizzeria.utils.PizzaToString;
+import fr.pizzeria.utils.Rule;
 import fr.pizzeria.utils.ToString;
 
 /**
@@ -23,6 +24,7 @@ public class Pizza implements Comparable<Pizza> {
 	 * Code d'identification de la pizza
 	 */
 	@ToString(separateur = "->")
+	@Rule(size = 3, uppercase = true)
 	private String code;
 
 	/**
