@@ -23,26 +23,26 @@ public class Pizza implements Comparable<Pizza> {
 	/**
 	 * Code d'identification de la pizza
 	 */
-	@ToString(separateur = "->")
+	@ToString(after = "->")
 	@Rule(size = 3, uppercase = true)
 	private String code;
 
 	/**
 	 * Nom complet de la pizza
 	 */
-	@ToString(separateur = " (")
+	@ToString
 	private String nom;
 
 	/**
 	 * Prix de la pizza
 	 */
-	@ToString(separateur = " €) régime ", format = true)
+	@ToString(before = " (", after = " €)", format = true)
 	private double prix;
 
 	/**
 	 * Catégorie de la pizza
 	 */
-	@ToString(categorie = true)
+	@ToString(categorie = true, before = " régime ")
 	private CategoriePizza categorie;
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {

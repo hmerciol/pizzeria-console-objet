@@ -35,6 +35,7 @@ public abstract class PizzaToString {
 				if (f.isAnnotationPresent(ToString.class)) { // sélection des attributs annotés
 					ToString annotation = f.getAnnotation(ToString.class);
 					Object value = f.get(pizza);
+					chaine.append(annotation.before());
 					if (annotation.format()) { // l'attribut prix a besoin d'un formatage
 						chaine.append(formatter.format(value).toString());
 					} else if (annotation.categorie()) { // l'attribut catégorie a besoin d'appeler getValue()
@@ -46,7 +47,7 @@ public abstract class PizzaToString {
 							chaine.append(value.toString());
 						}
 					}
-					chaine.append(annotation.separateur());
+					chaine.append(annotation.after());
 				}
 			}
 		} catch (Exception e) {

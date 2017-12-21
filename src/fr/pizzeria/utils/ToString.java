@@ -14,11 +14,18 @@ import java.lang.annotation.Target;
 public @interface ToString {
 
 	/**
-	 * Séparateur entre les éléments à afficher
+	 * Séparateur avant l'élément à afficher
 	 * 
 	 * @return Séparateur
 	 */
-	String separateur() default "";
+	String before() default "";
+
+	/**
+	 * Séparateur après l'élément à afficher
+	 * 
+	 * @return Séparateur
+	 */
+	String after() default "";
 
 	/**
 	 * Indicateur pour savoir s'il faut forcer la mise en majuscule de l'élément à
