@@ -1,7 +1,7 @@
 package fr.pizzeria.model;
 
-import java.lang.reflect.Field;
-import java.text.DecimalFormat;
+import fr.pizzeria.utils.PizzaToString;
+import fr.pizzeria.utils.ToString;
 
 /**
  * @author hmerciol
@@ -42,11 +42,6 @@ public class Pizza implements Comparable<Pizza> {
 	 */
 	@ToString(categorie = true)
 	private CategoriePizza categorie;
-
-	/**
-	 * Séparateur pour le stockage dans le fichier
-	 */
-	private static String separator = " & ";
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
@@ -104,56 +99,12 @@ public class Pizza implements Comparable<Pizza> {
 
 	@Override
 	public String toString() {
-		DecimalFormat formatter = new DecimalFormat("#.00");
-		StringBuilder chaine = new StringBuilder();
-		try {
-			Field[] fields = this.getClass().getDeclaredFields(); // récupération des attributs
-			for (Field f : fields) {
-				f.setAccessible(true);
-				if (f.isAnnotationPresent(ToString.class)) { // sélection des attributs annotés
-					ToString annotation = f.getAnnotation(ToString.class);
-					Object value = f.get(this);
-					if (annotation.format()) { // l'attribut prix a besoin d'un formatage
-						chaine.append(formatter.format(value).toString());
-					} else if (annotation.categorie()) { // l'attribut catégorie a besoin d'appeler getValue()
-						chaine.append(((CategoriePizza) value).getValue());
-					} else {
-						if (annotation.uppercase()) {
-							chaine.append(value.toString().toUpperCase());
-						} else {
-							chaine.append(value.toString());
-						}
-					}
-					chaine.append(annotation.separateur());
-				}
-			}
-		} catch (Exception e) {
-			System.out.println("Problème lors de l'affichage du menu");
-		}
-		return chaine.toString();
+		return PizzaToString.getString(this);
 	}
 
 	@Override
 	public int compareTo(Pizza pizza) {
 		return code.compareTo(pizza.getCode());
-	}
-
-	/**
-	 * Renvoie les données de la pizza formatées pour le fichier
-	 * 
-	 * @return Un String contenant les données formatées
-	 */
-	public String getData() {
-		return code + separator + nom + separator + prix + separator + categorie.toString();
-	}
-
-	/**
-	 * Renvoie le séparateur
-	 * 
-	 * @return Le séparateur
-	 */
-	public static String getSeparator() {
-		return separator;
 	}
 
 }

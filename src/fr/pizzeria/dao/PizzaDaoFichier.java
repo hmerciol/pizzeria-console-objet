@@ -13,6 +13,7 @@ import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.utils.PizzaToString;
 
 /**
  * @author hmerciol
@@ -44,15 +45,13 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 		try {
 			input = Files.newBufferedReader(Paths.get(URL_FICHIER));
 			line = input.readLine();
-			while (line != null) {
-				// parser et créer les pizzas
-				String[] data = line.split(Pizza.getSeparator());
+			while (line != null) { // parse chaque ligne pour créer une Pizza et l'ajouter à la liste
+				String[] data = line.split(PizzaToString.getSeparator());
 				if (data.length != 4) {
 					input.close();
 					throw new IOException("ici");
 				}
-				menuPizzas
-						.add(new Pizza(data[0], data[1], Double.parseDouble(data[2]), CategoriePizza.valueOf(data[3])));
+				menuPizzas.add(new Pizza(data[0], data[1], Double.parseDouble(data[2]), CategoriePizza.valueOf(data[3])));
 				line = input.readLine();
 			}
 			input.close();
@@ -68,10 +67,9 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 	private void fermerFichier() {
 		BufferedWriter output = null;
 		try {
-			output = Files.newBufferedWriter(Paths.get(URL_FICHIER)); // BufferedWriter(new FileWriter(new
-																		// File(URL_FICHIER)));
+			output = Files.newBufferedWriter(Paths.get(URL_FICHIER));
 			for (Pizza pizza : menuPizzas) {
-				output.write(pizza.getData() + "\n");
+				output.write(PizzaToString.getData(pizza) + "\n");
 			}
 			output.close();
 			menuPizzas = null;
