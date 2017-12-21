@@ -113,7 +113,11 @@ public class Pizza {
 					} else if (annotation.categorie()) { // l'attribut catégorie a besoin d'appeler getValue()
 						chaine.append(((CategoriePizza) value).getValue());
 					} else {
-						chaine.append(value.toString());
+						if (annotation.uppercase()) {
+							chaine.append(value.toString().toUpperCase());
+						} else {
+							chaine.append(value.toString());
+						}
 					}
 					chaine.append(annotation.separateur());
 				}

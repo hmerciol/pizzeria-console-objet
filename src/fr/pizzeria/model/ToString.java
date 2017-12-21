@@ -21,6 +21,14 @@ public @interface ToString {
 	String separateur() default "";
 
 	/**
+	 * Indicateur pour savoir s'il faut forcer la mise en majuscule de l'élément à
+	 * afficher
+	 * 
+	 * @return True pour forcer la casse en majuscule
+	 */
+	boolean uppercase() default false;
+
+	/**
 	 * Si l'élément annoté a besoin d'un formatage particulier
 	 * 
 	 * @return True si un formatage est nécessaire
