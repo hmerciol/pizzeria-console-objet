@@ -28,7 +28,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir la catégorie (en majuscules)");
 		String categorie = scan.next();
 		System.out.println("Veuillez saisir le prix");
-		double prix = scan.nextDouble();
+		double prix = Double.parseDouble(scan.next());
 
 		dao.saveNewPizza(new Pizza(code, nom, prix, CategoriePizza.valueOf(categorie)));
 	}

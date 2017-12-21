@@ -1,5 +1,6 @@
 package fr.pizzeria.model;
 
+import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
 /**
@@ -21,18 +22,25 @@ public class Pizza {
 	/**
 	 * Code d'identification de la pizza
 	 */
+	@ToString(separateur = "->")
 	private String code;
 
 	/**
 	 * Nom complet de la pizza
 	 */
+	@ToString(separateur = " (")
 	private String nom;
 
 	/**
 	 * Prix de la pizza
 	 */
+	@ToString(separateur = " €) régime ", format = true)
 	private double prix;
 
+	/**
+	 * Catégorie de la pizza
+	 */
+	@ToString(categorie = true)
 	private CategoriePizza categorie;
 
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
@@ -92,7 +100,28 @@ public class Pizza {
 	@Override
 	public String toString() {
 		DecimalFormat formatter = new DecimalFormat("#.00");
-		return code + " -> " + nom + " (" + formatter.format(prix) + " €), pizza " + categorie.getValue();
+		StringBuilder chaine = new StringBuilder();
+		try {
+			Field[] fields = this.getClass().getDeclaredFields(); // récupération des attributs
+			for (Field f : fields) {
+				f.setAccessible(true);
+				if (f.isAnnotationPresent(ToString.class)) { // sélection des attributs annotés
+					ToString annotation = f.getAnnotation(ToString.class);
+					Object value = f.get(this);
+					if (annotation.format()) { // l'attribut prix a besoin d'un formatage
+						chaine.append(formatter.format(value).toString());
+					} else if (annotation.categorie()) { // l'attribut catégorie a besoin d'appeler getValue()
+						chaine.append(((CategoriePizza) value).getValue());
+					} else {
+						chaine.append(value.toString());
+					}
+					chaine.append(annotation.separateur());
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Problème lors de l'affichage du menu");
+		}
+		return chaine.toString();
 	}
 
 }

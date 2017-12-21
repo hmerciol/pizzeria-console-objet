@@ -52,7 +52,7 @@ public class MenuPizzeria {
 	}
 
 	/**
-	 * Démarrage de l'affichage console et traitement des instructions utilisateur
+	 * Démarrage de l'affichage console et du traitement des instructions utilisateur
 	 */
 	public void demarreConsole() {
 		on = true;
@@ -64,6 +64,8 @@ public class MenuPizzeria {
 				executeMenu(instruction);
 			} catch (StockageException e) {
 				System.out.println(e.getMessage());
+			} catch (NumberFormatException e) {
+				System.out.println("Mauvais formatage du prix, veuillez recommencer");
 			}
 		}
 	}

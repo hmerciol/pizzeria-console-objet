@@ -53,6 +53,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 				toDelete = courant;
 				at = menuPizzas.indexOf(courant);
 				updated = true;
+				break;
 			} else if (courant.getCode().equals(pizza.getCode())) {
 				throw new UpdatePizzaException("Code pizza déjà utilisé ailleurs");
 			}

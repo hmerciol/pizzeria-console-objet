@@ -36,7 +36,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		System.out.println("Veuillez saisir la catégorie");
 		String categorie = scan.next();
 		System.out.println("Veuillez saisir le prix");
-		double prix = scan.nextDouble();
+		double prix = Double.parseDouble(scan.next());
 
 		dao.updatePizza(codeOld, new Pizza(code, nom, prix, CategoriePizza.valueOf(categorie)));
 	}
