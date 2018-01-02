@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm;
 
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
 import java.util.List;
 import java.util.Scanner;
 

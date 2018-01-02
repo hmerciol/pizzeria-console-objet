@@ -1,9 +1,7 @@
 package fr.pizzeria.utils;
 
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
 import java.lang.reflect.Field;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.model.Pizza;
 
@@ -12,11 +10,6 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public abstract class PizzaValidator {
-
-	/**
-	 * Logger du validateur
-	 */
-	private static final Logger LOG = LoggerFactory.getLogger("console");
 
 	/**
 	 * Validation d'un pizza

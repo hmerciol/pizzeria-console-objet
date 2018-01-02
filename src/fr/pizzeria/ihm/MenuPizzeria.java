@@ -1,12 +1,11 @@
 package fr.pizzeria.ihm;
 
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.TRACE;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
@@ -16,11 +15,6 @@ import fr.pizzeria.exception.StockageException;
  *
  */
 public class MenuPizzeria {
-
-	/**
-	 * Logger de MenuPizzeria
-	 */
-	private static final Logger LOG = LoggerFactory.getLogger("console");
 
 	/**
 	 * Liste des options du menu console
@@ -60,7 +54,8 @@ public class MenuPizzeria {
 	}
 
 	/**
-	 * Démarrage de l'affichage console et du traitement des instructions utilisateur
+	 * Démarrage de l'affichage console et du traitement des instructions
+	 * utilisateur
 	 */
 	public void demarreConsole() {
 		on = true;
@@ -68,6 +63,7 @@ public class MenuPizzeria {
 		while (on) {
 			afficher();
 			instruction = scan.nextInt();
+			TRACE.debug("Commande utilisateur : " + instruction);
 			try {
 				executeMenu(instruction);
 			} catch (StockageException e) {

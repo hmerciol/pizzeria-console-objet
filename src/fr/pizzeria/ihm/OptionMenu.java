@@ -2,9 +2,6 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
@@ -13,11 +10,6 @@ import fr.pizzeria.exception.StockageException;
  *
  */
 public abstract class OptionMenu {
-	
-	/**
-	 * Logger des classes d'options du menu
-	 */
-	protected static final Logger LOG = LoggerFactory.getLogger("console");
 
 	/**
 	 * Libellé de l'option menu

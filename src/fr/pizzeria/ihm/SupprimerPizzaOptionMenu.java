@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm;
 
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -13,7 +14,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	public SupprimerPizzaOptionMenu(Scanner scan, IPizzaDao dao) {
 		super(scan, dao);
-		libelle="Supprimer une pizza";
+		libelle = "Supprimer une pizza";
 	}
 
 	@Override

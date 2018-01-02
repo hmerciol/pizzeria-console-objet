@@ -3,15 +3,30 @@ package fr.pizzeria.console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoFichier;
 import fr.pizzeria.ihm.MenuPizzeria;
-import fr.pizzeria.model.*;
+import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.Pizza;
 
 /**
  * @author hmerciol
  *
  */
 public class PizzeriaAdminConsoleApp {
+
+	/**
+	 * Logger de sortie console de l'application
+	 */
+	public static final Logger LOG = LoggerFactory.getLogger("console");
+
+	/**
+	 * Logger de trace de l'application
+	 */
+	public static final Logger TRACE = LoggerFactory.getLogger("trace");
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
