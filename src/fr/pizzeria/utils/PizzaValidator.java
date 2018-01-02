@@ -2,6 +2,9 @@ package fr.pizzeria.utils;
 
 import java.lang.reflect.Field;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -9,6 +12,11 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public abstract class PizzaValidator {
+
+	/**
+	 * Logger du validateur
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger("console");
 
 	/**
 	 * Validation d'un pizza
@@ -39,7 +47,7 @@ public abstract class PizzaValidator {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Problème lors de la vérification de la pizza");
+			LOG.info("Problème lors de la vérification de la pizza");
 		}
 		return valide;
 	}

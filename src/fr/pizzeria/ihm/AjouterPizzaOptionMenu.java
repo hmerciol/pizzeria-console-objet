@@ -20,14 +20,14 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() throws SavePizzaException {
-		System.out.println("Ajout d\'une nouvelle pizza");
-		System.out.println("Veuillez saisir le code");
+		LOG.info("Ajout d\'une nouvelle pizza");
+		LOG.info("Veuillez saisir le code");
 		String code = scan.next();
-		System.out.println("Veuillez saisir le nom (sans espace)");
+		LOG.info("Veuillez saisir le nom (sans espace)");
 		String nom = scan.next();
-		System.out.println("Veuillez saisir la catégorie (avec \'_\' pour les espaces)");
+		LOG.info("Veuillez saisir la catégorie (avec \'_\' pour les espaces)");
 		String categorie = scan.next().toUpperCase();
-		System.out.println("Veuillez saisir le prix");
+		LOG.info("Veuillez saisir le prix");
 		double prix = Double.parseDouble(scan.next());
 
 		dao.saveNewPizza(new Pizza(code, nom, prix, CategoriePizza.valueOf(categorie)));

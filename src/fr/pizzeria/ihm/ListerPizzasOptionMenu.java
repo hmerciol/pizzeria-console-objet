@@ -19,10 +19,10 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() {
-		System.out.println("Liste des pizzas");
+		LOG.info("Liste des pizzas");
 		List<Pizza> menu = dao.findAllPizzas();
 		for (Pizza element : menu) {
-			System.out.println(element.toString());
+			LOG.info(element.toString());
 		}
 	}
 

@@ -20,22 +20,22 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() throws UpdatePizzaException {
-		System.out.println("Mise à jour d\'une pizza");
-		System.out.println("Veuillez choisir la pizza à modifier.");
-		System.out.println("(99 pour abandonner).");
+		LOG.info("Mise à jour d\'une pizza");
+		LOG.info("Veuillez choisir la pizza à modifier.");
+		LOG.info("(99 pour abandonner).");
 
 		String codeOld = scan.next();
 
 		if (codeOld.equals("99"))
 			return;
 
-		System.out.println("Veuillez saisir le code");
+		LOG.info("Veuillez saisir le code");
 		String code = scan.next();
-		System.out.println("Veuillez saisir le nom (sans espace)");
+		LOG.info("Veuillez saisir le nom (sans espace)");
 		String nom = scan.next();
-		System.out.println("Veuillez saisir la catégorie (avec \'_\' pour les espaces)");
+		LOG.info("Veuillez saisir la catégorie (avec \'_\' pour les espaces)");
 		String categorie = scan.next().toUpperCase();
-		System.out.println("Veuillez saisir le prix");
+		LOG.info("Veuillez saisir le prix");
 		double prix = Double.parseDouble(scan.next());
 
 		dao.updatePizza(codeOld, new Pizza(code, nom, prix, CategoriePizza.valueOf(categorie)));

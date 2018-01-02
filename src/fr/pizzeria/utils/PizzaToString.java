@@ -3,6 +3,9 @@ package fr.pizzeria.utils;
 import java.lang.reflect.Field;
 import java.text.DecimalFormat;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -11,6 +14,11 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public abstract class PizzaToString {
+
+	/**
+	 * Logger de PizzaToString
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger("console");
 
 	/**
 	 * Séparateur pour le stockage dans le fichier
@@ -51,7 +59,7 @@ public abstract class PizzaToString {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Problème lors de l'affichage du menu");
+			LOG.info("Problème lors de l'affichage du menu");
 		}
 		return chaine.toString();
 	}

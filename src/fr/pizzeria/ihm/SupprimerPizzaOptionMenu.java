@@ -18,9 +18,9 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public void execute() throws DeletePizzaException {
-		System.out.println("Suppression d\'une pizza");
-		System.out.println("Veuillez choisir la pizza à supprimer.");
-		System.out.println("(99 pour abandonner).");
+		LOG.info("Suppression d\'une pizza");
+		LOG.info("Veuillez choisir la pizza à supprimer.");
+		LOG.info("(99 pour abandonner).");
 
 		String codeSuppr = scan.next();
 

@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
@@ -13,6 +16,11 @@ import fr.pizzeria.exception.StockageException;
  *
  */
 public class MenuPizzeria {
+
+	/**
+	 * Logger de MenuPizzeria
+	 */
+	private static final Logger LOG = LoggerFactory.getLogger("console");
 
 	/**
 	 * Liste des options du menu console
@@ -43,12 +51,12 @@ public class MenuPizzeria {
 	 * Affiche en console les options en lignes de commande
 	 */
 	public void afficher() {
-		System.out.println("***** Pizzeria Administration *****");
+		LOG.info("***** Pizzeria Administration *****");
 		Set<Integer> keys = actions.keySet();
 		for (Integer key : keys) {
-			System.out.println(key.intValue() + ". " + actions.get(key).getLibelle());
+			LOG.info(key.intValue() + ". " + actions.get(key).getLibelle());
 		}
-		System.out.println("99. Sortir");
+		LOG.info("99. Sortir");
 	}
 
 	/**
@@ -63,9 +71,9 @@ public class MenuPizzeria {
 			try {
 				executeMenu(instruction);
 			} catch (StockageException e) {
-				System.out.println(e.getMessage());
+				LOG.info(e.getMessage());
 			} catch (NumberFormatException e) {
-				System.out.println("Mauvais formatage du prix, veuillez recommencer");
+				LOG.info("Mauvais formatage du prix, veuillez recommencer");
 			}
 		}
 	}
@@ -80,7 +88,7 @@ public class MenuPizzeria {
 	 */
 	public void executeMenu(int indice) throws StockageException {
 		if (indice == 99) {
-			System.out.println("Au revoir :(");
+			LOG.info("Au revoir :(");
 			on = false;
 		} else {
 			actions.get(indice).execute();
