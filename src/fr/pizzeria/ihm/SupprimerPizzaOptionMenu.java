@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm;
 
 import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
+import static fr.pizzeria.console.PizzeriaAdminConsoleApp.TRACE;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -24,6 +25,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		LOG.info("(99 pour abandonner).");
 
 		String codeSuppr = scan.next();
+		TRACE.debug("Commande utilisateur : " + codeSuppr);
 
 		if (codeSuppr.equals("99"))
 			return;
