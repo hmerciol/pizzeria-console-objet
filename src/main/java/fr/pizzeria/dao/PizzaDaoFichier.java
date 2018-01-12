@@ -8,9 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.utils.PizzaToString;
@@ -26,19 +24,11 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 	 */
 	private final String URL_FICHIER = "pizzas.txt";
 
-	public PizzaDaoFichier() {
-		super();
-	}
-
-	public PizzaDaoFichier(List<Pizza> menuPizzas) {
-		super(menuPizzas);
-		fermerFichier();
-	}
-
 	/**
 	 * Remplit la liste de pizzas locale à partir du fichier
+	 * @throws StockageException En cas de problème lors de l'accès au fichier
 	 */
-	private void ouvrirFichier() {
+	private void ouvrirFichier() throws StockageException {
 		menuPizzas = new ArrayList<Pizza>();
 		BufferedReader input = null;
 		String line = null;
@@ -56,15 +46,15 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 			}
 			input.close();
 		} catch (IOException e) {
-			System.out.println("Problème d'accès lors de la lecture du fichier");
-			System.out.println(e.getMessage());
+			throw new StockageException("Problème d'accès lors de la lecture du fichier");
 		}
 	}
 
 	/**
 	 * Ecrit la liste de pizzas dans le fichier puis vide la liste locale
+	 * @throws StockageException En cas de problème lors de l'accès au fichier
 	 */
-	private void fermerFichier() {
+	private void fermerFichier() throws StockageException {
 		BufferedWriter output = null;
 		try {
 			output = Files.newBufferedWriter(Paths.get(URL_FICHIER));
@@ -74,13 +64,12 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 			output.close();
 			menuPizzas = null;
 		} catch (IOException e) {
-			System.out.println("Problème d'accès lors de l\'écriture du fichier");
-			System.out.println(e.getMessage());
+			throw new StockageException("Problème d'accès lors de l\'écriture du fichier");
 		}
 	}
 
 	@Override
-	public List<Pizza> findAllPizzas() {
+	public List<Pizza> findAllPizzas() throws StockageException {
 		ouvrirFichier();
 		List<Pizza> retour = super.findAllPizzas();
 		fermerFichier();
@@ -88,21 +77,21 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 	}
 
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
+	public void saveNewPizza(Pizza pizza) throws StockageException {
 		ouvrirFichier();
 		super.saveNewPizza(pizza);
 		fermerFichier();
 	}
 
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
+	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
 		ouvrirFichier();
 		super.updatePizza(codePizza, pizza);
 		fermerFichier();
 	}
 
 	@Override
-	public void deletePizza(String codePizza) throws DeletePizzaException {
+	public void deletePizza(String codePizza) throws StockageException {
 		ouvrirFichier();
 		super.deletePizza(codePizza);
 		fermerFichier();

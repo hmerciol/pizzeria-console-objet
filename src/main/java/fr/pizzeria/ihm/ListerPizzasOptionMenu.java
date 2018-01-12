@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -19,7 +20,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public void execute() {
+	public void execute() throws StockageException {
 		LOG.info("Liste des pizzas");
 		List<Pizza> menu = dao.findAllPizzas();
 		for (Pizza element : menu) {

@@ -5,7 +5,7 @@ import static fr.pizzeria.console.PizzeriaAdminConsoleApp.TRACE;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -21,7 +21,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public void execute() throws UpdatePizzaException {
+	public void execute() throws StockageException {
 		LOG.info("Mise à jour d\'une pizza");
 		LOG.info("Veuillez choisir la pizza à modifier.");
 		LOG.info("(99 pour abandonner).");

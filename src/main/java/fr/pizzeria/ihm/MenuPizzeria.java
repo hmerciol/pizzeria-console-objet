@@ -4,6 +4,7 @@ import static fr.pizzeria.console.PizzeriaAdminConsoleApp.LOG;
 import static fr.pizzeria.console.PizzeriaAdminConsoleApp.TRACE;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -34,11 +35,14 @@ public class MenuPizzeria {
 	public MenuPizzeria(Scanner scan, IPizzaDao dao) {
 		super();
 		this.scan = scan;
-		actions = new LinkedHashMap<>(4);
+		actions = new LinkedHashMap<>(5);
 		actions.put(1, new ListerPizzasOptionMenu(scan, dao));
 		actions.put(2, new AjouterPizzaOptionMenu(scan, dao));
 		actions.put(3, new ModifierPizzaOptionMenu(scan, dao));
 		actions.put(4, new SupprimerPizzaOptionMenu(scan, dao));
+		if (ResourceBundle.getBundle("jdbc").getString("dao.type").equals("jdbc")) {
+			actions.put(5, new MenuConnectionDB(scan, dao));
+		}
 	}
 
 	/**
@@ -85,6 +89,9 @@ public class MenuPizzeria {
 	public void executeMenu(int indice) throws StockageException {
 		if (indice == 99) {
 			LOG.info("Au revoir :(");
+			if(ResourceBundle.getBundle("jdbc").getString("dao.type").equals("jdbc")) {
+				((MenuConnectionDB) actions.get(5)).closeDB();
+			}
 			on = false;
 		} else {
 			actions.get(indice).execute();

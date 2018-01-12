@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.utils.PizzaValidator;
@@ -20,22 +21,13 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 */
 	List<Pizza> menuPizzas = new ArrayList<Pizza>();
 
-	public PizzaDaoImpl() {
-		super();
-	}
-
-	public PizzaDaoImpl(List<Pizza> menuPizzas) {
-		super();
-		this.menuPizzas = menuPizzas;
-	}
-
 	@Override
-	public List<Pizza> findAllPizzas() {
+	public List<Pizza> findAllPizzas() throws StockageException {
 		return menuPizzas;
 	}
 
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
+	public void saveNewPizza(Pizza pizza) throws StockageException {
 		if(!PizzaValidator.pizzaValide(pizza)) {
 			throw new SavePizzaException("Pizza non valide");
 		}
@@ -48,7 +40,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
+	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
 		if(!PizzaValidator.pizzaValide(pizza)) {
 			throw new UpdatePizzaException("Pizza non valide");
 		}
@@ -73,7 +65,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public void deletePizza(String codePizza) throws DeletePizzaException {
+	public void deletePizza(String codePizza) throws StockageException {
 		boolean removed = false;
 		for (Pizza courant : menuPizzas) {
 			if (codePizza.equals(courant.getCode())) {

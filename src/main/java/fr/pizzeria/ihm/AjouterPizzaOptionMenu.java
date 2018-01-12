@@ -5,7 +5,7 @@ import static fr.pizzeria.console.PizzeriaAdminConsoleApp.TRACE;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -21,7 +21,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public void execute() throws SavePizzaException {
+	public void execute() throws StockageException {
 		LOG.info("Ajout d\'une nouvelle pizza");
 		LOG.info("Veuillez saisir le code");
 		String code = scan.next();

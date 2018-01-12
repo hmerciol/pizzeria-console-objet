@@ -5,7 +5,7 @@ import static fr.pizzeria.console.PizzeriaAdminConsoleApp.TRACE;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.StockageException;
 
 /**
  * @author hmerciol
@@ -19,7 +19,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	}
 
 	@Override
-	public void execute() throws DeletePizzaException {
+	public void execute() throws StockageException {
 		LOG.info("Suppression d\'une pizza");
 		LOG.info("Veuillez choisir la pizza à supprimer.");
 		LOG.info("(99 pour abandonner).");
