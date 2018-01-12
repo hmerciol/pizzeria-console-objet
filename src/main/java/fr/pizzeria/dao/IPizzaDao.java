@@ -38,7 +38,8 @@ public interface IPizzaDao {
 	 * Renvoie la liste des pizzas actuellement au menu
 	 * 
 	 * @return La liste des pizzas
-	 * @throws StockageException 
+	 * @throws StockageException
+	 *             Envoyé si la BDD est déconnectée
 	 */
 	public List<Pizza> findAllPizzas() throws StockageException;
 
@@ -49,7 +50,7 @@ public interface IPizzaDao {
 	 *            La pizza à ajouter
 	 * @throws StockageException
 	 *             Envoyé si le code de la pizza est déjà utilisé par une autre
-	 *             pizza du menu
+	 *             pizza du menu ou si la BDD est déconnectée
 	 */
 	public void saveNewPizza(Pizza pizza) throws StockageException;
 
@@ -62,7 +63,8 @@ public interface IPizzaDao {
 	 *            La nouvelle pizza à insérer à la place de celle sélectionnée
 	 * @throws StockageException
 	 *             Envoyé si la pizza à modifier n'existe pas ou si une pizza autre
-	 *             que celle à modifier utilise déjà ce code
+	 *             que celle à modifier utilise déjà ce code ou si la BDD est
+	 *             déconnectée
 	 */
 	public void updatePizza(String codePizza, Pizza pizza) throws StockageException;
 
@@ -72,7 +74,7 @@ public interface IPizzaDao {
 	 * @param codePizza
 	 *            Le code de la pizza à supprimer
 	 * @throws StockageException
-	 *             Envoyé si la pizza n'existe pas
+	 *             Envoyé si la pizza n'existe pas ou si la BDD est déconnectée
 	 */
 	public void deletePizza(String codePizza) throws StockageException;
 
