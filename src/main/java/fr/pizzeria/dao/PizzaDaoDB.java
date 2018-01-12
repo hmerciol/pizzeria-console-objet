@@ -45,7 +45,6 @@ public class PizzaDaoDB implements IPizzaDao {
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la connection à la base de données");
 		}
-		getFromDB();
 	}
 
 	/**
@@ -116,17 +115,18 @@ public class PizzaDaoDB implements IPizzaDao {
 		return menuPizzas;
 	}
 
-	/**
-	 * Stocke une pizza sur la BDD
-	 * 
-	 * @param pizza
-	 *            La pizza à stocker
-	 * @throws StockageException
-	 *             En cas de problème lors de l'accès à la BDD
-	 */
-	private void saveInDB(Pizza pizza) throws StockageException {
+	@Override
+	public List<Pizza> findAllPizzas() throws StockageException {
+		return getFromDB();
+	}
+
+	@Override
+	public void saveNewPizza(Pizza pizza) throws StockageException {
 		if (databaseConnection == null) {
 			throw new StockageException("La base de données n'est pas connectée");
+		}
+		if(!PizzaValidator.pizzaValide(pizza)) {
+			throw new SavePizzaException("Pizza non valide");
 		}
 
 		PreparedStatement statement = null;
@@ -152,15 +152,41 @@ public class PizzaDaoDB implements IPizzaDao {
 		}
 	}
 
-	/**
-	 * Supprime une pizza sur la BDD
-	 * 
-	 * @param codePizza
-	 *            Le code de la pizza à supprimer
-	 * @throws StockageException
-	 *             En cas de problème lors de l'accès à la BDD
-	 */
-	private void deleteInDB(String codePizza) throws StockageException {
+	@Override
+	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
+		if (databaseConnection == null) {
+			throw new StockageException("La base de données n'est pas connectée");
+		}
+		if(!PizzaValidator.pizzaValide(pizza)) {
+			throw new UpdatePizzaException("Pizza non valide");
+		}
+		
+		PreparedStatement statement = null;
+		try {
+			statement = databaseConnection.prepareStatement(
+					"UPDATE pizzeria.pizza SET pizza_code=?, pizza_nom=?, pizza_categorie=?, pizza_prix=? WHERE pizza_code=?;");
+			statement.setString(1, pizza.getCode());
+			statement.setString(2, pizza.getNom());
+			statement.setString(3, pizza.getCategorie().toString());
+			statement.setDouble(4, pizza.getPrix());
+			statement.setString(5, codePizza);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new StockageException("Problème lors de la mise à jour d'une pizza dans la base de données");
+
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					throw new StockageException("Problème lors de la mise à jour d'une pizza dans la base de données");
+				}
+			}
+		}
+	}
+
+	@Override
+	public void deletePizza(String codePizza) throws StockageException {
 		if (databaseConnection == null) {
 			throw new StockageException("La base de données n'est pas connectée");
 		}
@@ -181,33 +207,6 @@ public class PizzaDaoDB implements IPizzaDao {
 				}
 			}
 		}
-	}
-
-	@Override
-	public List<Pizza> findAllPizzas() throws StockageException {
-		return getFromDB();
-	}
-
-	@Override
-	public void saveNewPizza(Pizza pizza) throws StockageException {
-		if(!PizzaValidator.pizzaValide(pizza)) {
-			throw new SavePizzaException("Pizza non valide");
-		}
-		saveInDB(pizza);
-	}
-
-	@Override
-	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
-		if(!PizzaValidator.pizzaValide(pizza)) {
-			throw new UpdatePizzaException("Pizza non valide");
-		}
-		deleteInDB(codePizza);
-		saveInDB(pizza);
-	}
-
-	@Override
-	public void deletePizza(String codePizza) throws StockageException {
-		deleteInDB(codePizza);
 	}
 
 }
