@@ -128,12 +128,11 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 		PreparedStatement statement = null;
 		try {
 			statement = databaseConnection.prepareStatement(
-					"INSERT INTO pizzeria.pizza VALUES (?, ?, ?, ?, ?);");
-			statement.setInt(1, pizza.getId().intValue());
-			statement.setString(2, pizza.getCode());
-			statement.setString(3, pizza.getNom());
-			statement.setString(4, pizza.getCategorie().toString());
-			statement.setDouble(5, pizza.getPrix());
+					"INSERT INTO pizzeria.pizza (pizza_code, pizza_nom, pizza_categorie, pizza_prix) VALUES (?, ?, ?, ?);");
+			statement.setString(1, pizza.getCode());
+			statement.setString(2, pizza.getNom());
+			statement.setString(3, pizza.getCategorie().toString());
+			statement.setDouble(4, pizza.getPrix());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de l'ajout d'une pizza à la base de données");
@@ -166,7 +165,7 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 		Statement statement = null;
 		try {
 			statement = databaseConnection.createStatement();
-			statement.executeUpdate("DELETE FROM pizzeria.pizza WHERE pizza_code = " + codePizza+";");
+			statement.executeUpdate("DELETE FROM pizzeria.pizza WHERE pizza_code = " + codePizza + ";");
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
 
