@@ -165,7 +165,7 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 		Statement statement = null;
 		try {
 			statement = databaseConnection.createStatement();
-			statement.executeUpdate("DELETE FROM pizzeria.pizza WHERE pizza_code = " + codePizza + ";");
+			statement.executeUpdate("DELETE FROM pizzeria.pizza WHERE pizza_code = '" + codePizza + "';");
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
 
