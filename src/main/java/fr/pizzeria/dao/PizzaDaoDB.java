@@ -97,16 +97,14 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 				try {
 					results.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new StockageException("Problème lors de la connection à la base de données");
 				}
 			}
 			if (statement != null) {
 				try {
 					statement.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new StockageException("Problème lors de la connection à la base de données");
 				}
 			}
 		}
@@ -142,8 +140,7 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 				try {
 					statement.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new StockageException("Problème lors de l'ajout d'une pizza à la base de données");
 				}
 			}
 		}
@@ -174,8 +171,7 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 				try {
 					statement.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
 				}
 			}
 		}

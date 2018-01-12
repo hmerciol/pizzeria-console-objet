@@ -21,8 +21,7 @@ public class MenuConnectionDB extends OptionMenu {
 			try {
 				daoDB.closeConnection();
 			} catch (StockageException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.info("Problème lors de la fermeture de la connection");
 			}
 		}
 	}
