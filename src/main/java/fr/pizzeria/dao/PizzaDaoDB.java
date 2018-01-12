@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.utils.PizzaValidator;
 
 /**
  * @author hmerciol
@@ -187,11 +190,17 @@ public class PizzaDaoDB implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws StockageException {
+		if(!PizzaValidator.pizzaValide(pizza)) {
+			throw new SavePizzaException("Pizza non valide");
+		}
 		saveInDB(pizza);
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
+		if(!PizzaValidator.pizzaValide(pizza)) {
+			throw new UpdatePizzaException("Pizza non valide");
+		}
 		deleteInDB(codePizza);
 		saveInDB(pizza);
 	}
