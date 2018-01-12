@@ -54,6 +54,7 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 	public void closeConnection() throws StockageException {
 		try {
 			databaseConnection.close();
+			databaseConnection = null;
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la déconnection à la base de données");
 		}
