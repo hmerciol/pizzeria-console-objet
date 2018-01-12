@@ -18,7 +18,7 @@ import fr.pizzeria.model.Pizza;
  * @author hmerciol
  *
  */
-public class PizzaDaoDB extends PizzaDaoImpl {
+public class PizzaDaoDB implements IPizzaDao {
 
 	/**
 	 * Connection à la base de données
@@ -70,17 +70,17 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 	}
 
 	/**
-	 * Récupère en local le tableau des pizzas stocké en BDD
+	 * Récupère le tableau des pizzas stocké en BDD
 	 * 
 	 * @throws StockageException
 	 *             En cas de problème lors de l'accès à la BDD
 	 */
-	private void getFromDB() throws StockageException {
+	private List<Pizza> getFromDB() throws StockageException {
 		if (databaseConnection == null) {
 			throw new StockageException("La base de données n'est pas connectée");
 		}
 
-		menuPizzas = new ArrayList<>();
+		List<Pizza> menuPizzas = new ArrayList<>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -109,6 +109,8 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 				}
 			}
 		}
+		
+		return menuPizzas;
 	}
 
 	/**
@@ -180,26 +182,22 @@ public class PizzaDaoDB extends PizzaDaoImpl {
 
 	@Override
 	public List<Pizza> findAllPizzas() throws StockageException {
-		getFromDB();
-		return super.findAllPizzas();
+		return getFromDB();
 	}
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws StockageException {
-		super.saveNewPizza(pizza);
 		saveInDB(pizza);
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
-		super.updatePizza(codePizza, pizza);
 		deleteInDB(codePizza);
 		saveInDB(pizza);
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws StockageException {
-		super.deletePizza(codePizza);
 		deleteInDB(codePizza);
 	}
 
