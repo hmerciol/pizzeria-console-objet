@@ -31,6 +31,11 @@ public class MenuPizzeria {
 	 * Vaut true tant que l'application tourne
 	 */
 	private boolean on = false;
+	
+	/**
+	 * Vaut true si l'application utilise jdbc
+	 */
+	private boolean jdbc = false;
 
 	public MenuPizzeria(Scanner scan, IPizzaDao dao) {
 		super();
@@ -42,6 +47,7 @@ public class MenuPizzeria {
 		actions.put(4, new SupprimerPizzaOptionMenu(scan, dao));
 		if (ResourceBundle.getBundle("jdbc").getString("dao.type").equals("jdbc")) {
 			actions.put(5, new MenuConnectionDB(scan, dao));
+			jdbc=true;
 		}
 	}
 
@@ -89,7 +95,7 @@ public class MenuPizzeria {
 	public void executeMenu(int indice) throws StockageException {
 		if (indice == 99) {
 			LOG.info("Au revoir :(");
-			if(ResourceBundle.getBundle("jdbc").getString("dao.type").equals("jdbc")) {
+			if(jdbc) {
 				((MenuConnectionDB) actions.get(5)).closeDB();
 			}
 			on = false;
