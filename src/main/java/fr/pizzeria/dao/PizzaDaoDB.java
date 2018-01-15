@@ -27,6 +27,8 @@ public class PizzaDaoDB implements IPizzaDao {
 	 * Connection à la base de données
 	 */
 	private Connection databaseConnection;
+	
+	private String dataSchema;
 
 	/**
 	 * Ouvrir la connection à la base de données
@@ -40,10 +42,11 @@ public class PizzaDaoDB implements IPizzaDao {
 			Class.forName(jdbcProperties.getString("jdbc.driver"));
 			databaseConnection = DriverManager.getConnection(jdbcProperties.getString("jdbc.url"),
 					jdbcProperties.getString("jdbc.user"), jdbcProperties.getString("jdbc.pw"));
+			dataSchema = jdbcProperties.getString("jdbc.data.schema");
 		} catch (ClassNotFoundException e) {
 			throw new StockageException("Problème lors de la connection à la base de données");
 		} catch (SQLException e) {
-			throw new StockageException("Problème lors de la connection à la base de données");
+			throw new StockageException("Problème lors de la connection à la base de données\n"+e.getMessage());
 		}
 	}
 
@@ -87,7 +90,7 @@ public class PizzaDaoDB implements IPizzaDao {
 		ResultSet results = null;
 		try {
 			statement = databaseConnection.createStatement();
-			results = statement.executeQuery("SELECT * FROM pizzeria.pizza;");
+			results = statement.executeQuery("SELECT * FROM "+dataSchema+".pizza;");
 			while (results.next()) {
 				menuPizzas.add(new Pizza(results.getString("pizza_code"), results.getString("pizza_nom"),
 						results.getFloat("pizza_prix"), CategoriePizza.valueOf(results.getString("pizza_categorie"))));
@@ -132,7 +135,7 @@ public class PizzaDaoDB implements IPizzaDao {
 		PreparedStatement statement = null;
 		try {
 			statement = databaseConnection.prepareStatement(
-					"INSERT INTO pizzeria.pizza (pizza_code, pizza_nom, pizza_categorie, pizza_prix) VALUES (?, ?, ?, ?);");
+					"INSERT INTO "+dataSchema+".pizza (pizza_code, pizza_nom, pizza_categorie, pizza_prix) VALUES (?, ?, ?, ?);");
 			statement.setString(1, pizza.getCode());
 			statement.setString(2, pizza.getNom());
 			statement.setString(3, pizza.getCategorie().toString());
@@ -164,7 +167,7 @@ public class PizzaDaoDB implements IPizzaDao {
 		PreparedStatement statement = null;
 		try {
 			statement = databaseConnection.prepareStatement(
-					"UPDATE pizzeria.pizza SET pizza_code=?, pizza_nom=?, pizza_categorie=?, pizza_prix=? WHERE pizza_code=?;");
+					"UPDATE "+dataSchema+".pizza SET pizza_code=?, pizza_nom=?, pizza_categorie=?, pizza_prix=? WHERE pizza_code=?;");
 			statement.setString(1, pizza.getCode());
 			statement.setString(2, pizza.getNom());
 			statement.setString(3, pizza.getCategorie().toString());
@@ -194,7 +197,7 @@ public class PizzaDaoDB implements IPizzaDao {
 		Statement statement = null;
 		try {
 			statement = databaseConnection.createStatement();
-			statement.executeUpdate("DELETE FROM pizzeria.pizza WHERE pizza_code = '" + codePizza + "';");
+			statement.executeUpdate("DELETE FROM "+dataSchema+".pizza WHERE pizza_code = '" + codePizza + "';");
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
 

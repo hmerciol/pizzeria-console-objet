@@ -99,8 +99,10 @@ public class MenuPizzeria {
 				((MenuConnectionDB) actions.get(5)).closeDB();
 			}
 			on = false;
-		} else {
+		} else if (actions.containsKey(indice)){
 			actions.get(indice).execute();
+		} else {
+			LOG.info("Commande inconnue");
 		}
 	}
 }
