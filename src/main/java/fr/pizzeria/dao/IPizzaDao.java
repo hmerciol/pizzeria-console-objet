@@ -31,7 +31,7 @@ public interface IPizzaDao {
 			pizzaDao = new PizzaDaoDB();
 			break;
 		case "hibernate":
-			pizzaDao = new PizzaDaoHibernate();
+			pizzaDao = new PizzaDaoJpa();
 			break;
 		}
 		return pizzaDao;

@@ -18,7 +18,7 @@ import fr.pizzeria.utils.PizzaValidator;
  * @author hmerciol
  *
  */
-public class PizzaDaoHibernate implements IPizzaDao {
+public class PizzaDaoJpa implements IPizzaDao {
 	
 	/**
 	 * Pour gérer les connections à la BDD
