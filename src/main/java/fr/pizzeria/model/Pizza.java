@@ -1,5 +1,13 @@
 package fr.pizzeria.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import fr.pizzeria.utils.PizzaToString;
 import fr.pizzeria.utils.Rule;
 import fr.pizzeria.utils.ToString;
@@ -8,16 +16,21 @@ import fr.pizzeria.utils.ToString;
  * @author hmerciol
  *
  */
+@Entity
+@Table(name="pizza")
 public class Pizza implements Comparable<Pizza> {
 
 	/**
 	 * Compteur servant à donner un identifiant unique à chaque pizza
 	 */
+	@Transient
 	private static int compteur = 0;
 
 	/**
 	 * Identifiant unique de la pizza
 	 */
+	@Id
+	@Column(name="pizza_id")
 	private Integer id;
 
 	/**
@@ -25,26 +38,50 @@ public class Pizza implements Comparable<Pizza> {
 	 */
 	@ToString(after = "->")
 	@Rule(size = 3, uppercase = true)
+	@Column(name="pizza_code")
 	private String code;
 
 	/**
 	 * Nom complet de la pizza
 	 */
 	@ToString
+	@Column(name="pizza_nom")
 	private String nom;
 
 	/**
 	 * Prix de la pizza
 	 */
 	@ToString(before = " (", after = " €)", format = true)
+	@Column(name="pizza_prix")
 	private double prix;
 
 	/**
 	 * Catégorie de la pizza
 	 */
 	@ToString(categorie = true, before = " régime ")
+	@Enumerated(EnumType.STRING)
+	@Column(name="pizza_categorie")
 	private CategoriePizza categorie;
 
+	/**
+	 * Constructeur par défaut pour hibernate
+	 */
+	public Pizza() {
+		super();
+	}
+
+	/**
+	 * Constructeur complet
+	 * 
+	 * @param code
+	 *            Le code la pizza
+	 * @param nom
+	 *            Le nom de la pizza
+	 * @param prix
+	 *            Le prix de la pizza
+	 * @param categorie
+	 *            La catégorie de la pizza
+	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
 		this.id = compteur++;
@@ -97,6 +134,56 @@ public class Pizza implements Comparable<Pizza> {
 	 */
 	public CategoriePizza getCategorie() {
 		return categorie;
+	}
+
+	/**
+	 * pour hibernate
+	 * 
+	 * @param id
+	 *            l'identifiant
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * pour hibernate
+	 * 
+	 * @param code
+	 *            le code
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * pour hibernate
+	 * 
+	 * @param nom
+	 *            le nom
+	 */
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	/**
+	 * pour hibernate
+	 * 
+	 * @param prix
+	 *            le prix
+	 */
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+
+	/**
+	 * pour hibernate
+	 * 
+	 * @param categorie
+	 *            la catégorie
+	 */
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
 	}
 
 	@Override

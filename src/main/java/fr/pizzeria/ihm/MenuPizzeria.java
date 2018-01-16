@@ -93,14 +93,14 @@ public class MenuPizzeria {
 	 *             Envoyé en cas de mauvaise manipulation du menu des pizzas
 	 */
 	public void executeMenu(int indice) throws StockageException {
-		if (indice == 99) {
+		if (actions.containsKey(indice)){
+			actions.get(indice).execute();
+		} else if (indice == 99) {
 			LOG.info("Au revoir :(");
 			if(jdbc) {
 				((MenuConnectionDB) actions.get(5)).closeDB();
 			}
 			on = false;
-		} else if (actions.containsKey(indice)){
-			actions.get(indice).execute();
 		} else {
 			LOG.info("Commande inconnue");
 		}
