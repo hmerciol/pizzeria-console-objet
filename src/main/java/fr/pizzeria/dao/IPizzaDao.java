@@ -30,8 +30,8 @@ public interface IPizzaDao {
 		case "jdbc":
 			pizzaDao = new PizzaDaoDB();
 			break;
-		case "hibernate":
-			pizzaDao = new PizzaDaoHibernate();
+		case "jpa":
+			pizzaDao = new PizzaDaoJpa();
 			break;
 		}
 		return pizzaDao;

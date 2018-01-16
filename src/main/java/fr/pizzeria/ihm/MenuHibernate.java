@@ -3,7 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoHibernate;
+import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.exception.StockageException;
 
 public class MenuHibernate extends OptionMenu {
@@ -14,13 +14,13 @@ public class MenuHibernate extends OptionMenu {
 	}
 	
 	public void closeHibernate() {
-		PizzaDaoHibernate daoHb = (PizzaDaoHibernate) dao;
+		PizzaDaoJpa daoHb = (PizzaDaoJpa) dao;
 		daoHb.closeConnection();
 	}
 
 	@Override
 	public void execute() throws StockageException {
-		PizzaDaoHibernate daoHb = (PizzaDaoHibernate) dao;
+		PizzaDaoJpa daoHb = (PizzaDaoJpa) dao;
 		daoHb.resetConnection();
 	}
 

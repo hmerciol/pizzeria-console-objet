@@ -54,7 +54,7 @@ public class MenuPizzeria {
 		if (data.equals("jdbc")) {
 			actions.put(5, new MenuConnectionDB(scan, dao));
 			jdbc=true;
-		} else if(data.equals("hibernate")) {
+		} else if(data.equals("jpa")) {
 			actions.put(5, new MenuHibernate(scan, dao));
 			hibernate=true;
 		}
