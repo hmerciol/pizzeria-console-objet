@@ -6,9 +6,9 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.exception.StockageException;
 
-public class MenuHibernate extends OptionMenu {
+public class MenuJpa extends OptionMenu {
 
-	public MenuHibernate(Scanner scan, IPizzaDao dao) {
+	public MenuJpa(Scanner scan, IPizzaDao dao) {
 		super(scan, dao);
 		libelle = "Relancer la connection à la BDD";
 	}

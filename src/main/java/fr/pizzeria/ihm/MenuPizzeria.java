@@ -55,7 +55,7 @@ public class MenuPizzeria {
 			actions.put(5, new MenuConnectionDB(scan, dao));
 			jdbc=true;
 		} else if(data.equals("jpa")) {
-			actions.put(5, new MenuHibernate(scan, dao));
+			actions.put(5, new MenuJpa(scan, dao));
 			hibernate=true;
 		}
 	}
@@ -109,7 +109,7 @@ public class MenuPizzeria {
 			if(jdbc) {
 				((MenuConnectionDB) actions.get(5)).closeDB();
 			} else if(hibernate) {
-				((MenuHibernate) actions.get(5)).closeHibernate();
+				((MenuJpa) actions.get(5)).closeHibernate();
 			}
 			on = false;
 		} else {
