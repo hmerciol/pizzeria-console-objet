@@ -36,6 +36,11 @@ public class MenuPizzeria {
 	 * Vaut true si l'application utilise jdbc
 	 */
 	private boolean jdbc = false;
+	
+	/**
+	 * Vaut true si l'application utilise hibernate
+	 */
+	private boolean hibernate = false;
 
 	public MenuPizzeria(Scanner scan, IPizzaDao dao) {
 		super();
@@ -45,9 +50,13 @@ public class MenuPizzeria {
 		actions.put(2, new AjouterPizzaOptionMenu(scan, dao));
 		actions.put(3, new ModifierPizzaOptionMenu(scan, dao));
 		actions.put(4, new SupprimerPizzaOptionMenu(scan, dao));
-		if (ResourceBundle.getBundle("jdbc").getString("dao.type").equals("jdbc")) {
+		String data = ResourceBundle.getBundle("jdbc").getString("dao.type");
+		if (data.equals("jdbc")) {
 			actions.put(5, new MenuConnectionDB(scan, dao));
 			jdbc=true;
+		} else if(data.equals("hibernate")) {
+			actions.put(5, new MenuHibernate(scan, dao));
+			hibernate=true;
 		}
 	}
 
@@ -99,6 +108,8 @@ public class MenuPizzeria {
 			LOG.info("Au revoir :(");
 			if(jdbc) {
 				((MenuConnectionDB) actions.get(5)).closeDB();
+			} else if(hibernate) {
+				((MenuHibernate) actions.get(5)).closeHibernate();
 			}
 			on = false;
 		} else {

@@ -24,6 +24,15 @@ public class PizzaDaoHibernate implements IPizzaDao {
 	 * Pour gérer les connections à la BDD
 	 */
 	private EntityManagerFactory factory = Persistence.createEntityManagerFactory("pizzeria");
+	
+	public void closeConnection() {
+		factory.close();
+	}
+	
+	public void resetConnection() {
+		factory.close();
+		factory = Persistence.createEntityManagerFactory("pizzeria");
+	}
 
 	@Override
 	public List<Pizza> findAllPizzas() throws StockageException {
