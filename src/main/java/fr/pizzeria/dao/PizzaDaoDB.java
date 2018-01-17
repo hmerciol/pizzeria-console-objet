@@ -27,7 +27,7 @@ public class PizzaDaoDB implements IPizzaDao {
 	 * Connection à la base de données
 	 */
 	private Connection databaseConnection;
-	
+
 	private String dataSchema;
 
 	/**
@@ -46,7 +46,7 @@ public class PizzaDaoDB implements IPizzaDao {
 		} catch (ClassNotFoundException e) {
 			throw new StockageException("Problème lors de la connection à la base de données");
 		} catch (SQLException e) {
-			throw new StockageException("Problème lors de la connection à la base de données\n"+e.getMessage());
+			throw new StockageException("Problème lors de la connection à la base de données\n" + e.getMessage());
 		}
 	}
 
@@ -86,35 +86,20 @@ public class PizzaDaoDB implements IPizzaDao {
 		}
 
 		List<Pizza> menuPizzas = new ArrayList<>();
-		Statement statement = null;
-		ResultSet results = null;
-		try {
-			statement = databaseConnection.createStatement();
-			results = statement.executeQuery("SELECT * FROM "+dataSchema+".pizza;");
-			while (results.next()) {
-				menuPizzas.add(new Pizza(results.getString("pizza_code"), results.getString("pizza_nom"),
-						results.getFloat("pizza_prix"), CategoriePizza.valueOf(results.getString("pizza_categorie"))));
+
+		try (Statement statement = databaseConnection.createStatement()) {
+			try (ResultSet results = statement.executeQuery("SELECT * FROM " + dataSchema + ".pizza;")) {
+				while (results.next()) {
+					menuPizzas.add(new Pizza(results.getString("pizza_code"), results.getString("pizza_nom"),
+							results.getFloat("pizza_prix"),
+							CategoriePizza.valueOf(results.getString("pizza_categorie"))));
+				}
 			}
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la connection à la base de données");
 
-		} finally {
-			if (results != null) {
-				try {
-					results.close();
-				} catch (SQLException e) {
-					throw new StockageException("Problème lors de la connection à la base de données");
-				}
-			}
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					throw new StockageException("Problème lors de la connection à la base de données");
-				}
-			}
 		}
-		
+
 		return menuPizzas;
 	}
 
@@ -128,14 +113,13 @@ public class PizzaDaoDB implements IPizzaDao {
 		if (databaseConnection == null) {
 			throw new StockageException("La base de données n'est pas connectée");
 		}
-		if(!PizzaValidator.pizzaValide(pizza)) {
+		if (!PizzaValidator.pizzaValide(pizza)) {
 			throw new SavePizzaException("Pizza non valide");
 		}
 
-		PreparedStatement statement = null;
-		try {
-			statement = databaseConnection.prepareStatement(
-					"INSERT INTO "+dataSchema+".pizza (pizza_code, pizza_nom, pizza_categorie, pizza_prix) VALUES (?, ?, ?, ?);");
+		String query = "INSERT INTO " + dataSchema
+				+ ".pizza (pizza_code, pizza_nom, pizza_categorie, pizza_prix) VALUES (?, ?, ?, ?);";
+		try (PreparedStatement statement = databaseConnection.prepareStatement(query)) {
 			statement.setString(1, pizza.getCode());
 			statement.setString(2, pizza.getNom());
 			statement.setString(3, pizza.getCategorie().toString());
@@ -144,14 +128,6 @@ public class PizzaDaoDB implements IPizzaDao {
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de l'ajout d'une pizza à la base de données");
 
-		} finally {
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					throw new StockageException("Problème lors de l'ajout d'une pizza à la base de données");
-				}
-			}
 		}
 	}
 
@@ -160,14 +136,13 @@ public class PizzaDaoDB implements IPizzaDao {
 		if (databaseConnection == null) {
 			throw new StockageException("La base de données n'est pas connectée");
 		}
-		if(!PizzaValidator.pizzaValide(pizza)) {
+		if (!PizzaValidator.pizzaValide(pizza)) {
 			throw new UpdatePizzaException("Pizza non valide");
 		}
-		
-		PreparedStatement statement = null;
-		try {
-			statement = databaseConnection.prepareStatement(
-					"UPDATE "+dataSchema+".pizza SET pizza_code=?, pizza_nom=?, pizza_categorie=?, pizza_prix=? WHERE pizza_code=?;");
+
+		String query = "UPDATE " + dataSchema
+				+ ".pizza SET pizza_code=?, pizza_nom=?, pizza_categorie=?, pizza_prix=? WHERE pizza_code=?;";
+		try (PreparedStatement statement = databaseConnection.prepareStatement(query)) {
 			statement.setString(1, pizza.getCode());
 			statement.setString(2, pizza.getNom());
 			statement.setString(3, pizza.getCategorie().toString());
@@ -177,14 +152,6 @@ public class PizzaDaoDB implements IPizzaDao {
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la mise à jour d'une pizza dans la base de données");
 
-		} finally {
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					throw new StockageException("Problème lors de la mise à jour d'une pizza dans la base de données");
-				}
-			}
 		}
 	}
 
@@ -194,21 +161,13 @@ public class PizzaDaoDB implements IPizzaDao {
 			throw new StockageException("La base de données n'est pas connectée");
 		}
 
-		Statement statement = null;
-		try {
-			statement = databaseConnection.createStatement();
-			statement.executeUpdate("DELETE FROM "+dataSchema+".pizza WHERE pizza_code = '" + codePizza + "';");
+		String query = "DELETE FROM " + dataSchema + ".pizza WHERE pizza_code = ?;";
+		try (PreparedStatement statement = databaseConnection.prepareStatement(query)) {
+			statement.setString(2, codePizza);
+			statement.executeQuery();
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
 
-		} finally {
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
-				}
-			}
 		}
 	}
 

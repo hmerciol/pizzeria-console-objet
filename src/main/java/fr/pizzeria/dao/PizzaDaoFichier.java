@@ -22,18 +22,18 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 	/**
 	 * URL du fichier de données
 	 */
-	private final String URL_FICHIER = "pizzas.txt";
+	private static final String URL_FICHIER = "pizzas.txt";
 
 	/**
 	 * Remplit la liste de pizzas locale à partir du fichier
-	 * @throws StockageException En cas de problème lors de l'accès au fichier
+	 * 
+	 * @throws StockageException
+	 *             En cas de problème lors de l'accès au fichier
 	 */
 	private void ouvrirFichier() throws StockageException {
 		menuPizzas = new ArrayList<Pizza>();
-		BufferedReader input = null;
 		String line = null;
-		try {
-			input = Files.newBufferedReader(Paths.get(URL_FICHIER));
+		try (BufferedReader input = Files.newBufferedReader(Paths.get(URL_FICHIER))) {
 			line = input.readLine();
 			while (line != null) { // parse chaque ligne pour créer une Pizza et l'ajouter à la liste
 				String[] data = line.split(PizzaToString.getSeparator());
@@ -41,10 +41,10 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 					input.close();
 					throw new IOException("ici");
 				}
-				menuPizzas.add(new Pizza(data[0], data[1], Double.parseDouble(data[2]), CategoriePizza.valueOf(data[3])));
+				menuPizzas
+						.add(new Pizza(data[0], data[1], Double.parseDouble(data[2]), CategoriePizza.valueOf(data[3])));
 				line = input.readLine();
 			}
-			input.close();
 		} catch (IOException e) {
 			throw new StockageException("Problème d'accès lors de la lecture du fichier");
 		}
@@ -52,16 +52,15 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 
 	/**
 	 * Ecrit la liste de pizzas dans le fichier puis vide la liste locale
-	 * @throws StockageException En cas de problème lors de l'accès au fichier
+	 * 
+	 * @throws StockageException
+	 *             En cas de problème lors de l'accès au fichier
 	 */
 	private void fermerFichier() throws StockageException {
-		BufferedWriter output = null;
-		try {
-			output = Files.newBufferedWriter(Paths.get(URL_FICHIER));
+		try (BufferedWriter output = Files.newBufferedWriter(Paths.get(URL_FICHIER))) {
 			for (Pizza pizza : menuPizzas) {
 				output.write(PizzaToString.getData(pizza) + "\n");
 			}
-			output.close();
 			menuPizzas = null;
 		} catch (IOException e) {
 			throw new StockageException("Problème d'accès lors de l\'écriture du fichier");
