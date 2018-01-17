@@ -163,7 +163,7 @@ public class PizzaDaoDB implements IPizzaDao {
 
 		String query = "DELETE FROM " + dataSchema + ".pizza WHERE pizza_code = ?;";
 		try (PreparedStatement statement = databaseConnection.prepareStatement(query)) {
-			statement.setString(2, codePizza);
+			statement.setString(1, codePizza);
 			statement.executeQuery();
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
