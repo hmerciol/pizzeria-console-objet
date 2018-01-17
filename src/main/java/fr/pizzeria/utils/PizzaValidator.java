@@ -10,6 +10,10 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public abstract class PizzaValidator {
+	
+	private PizzaValidator() {
+		super();
+	}
 
 	/**
 	 * Validation d'un pizza

@@ -196,4 +196,13 @@ public class Pizza implements Comparable<Pizza> {
 		return code.compareTo(pizza.getCode());
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Pizza) {
+			Pizza piz = (Pizza) obj;
+			return code.equals(piz.getCode());
+		}
+		return super.equals(obj);
+	}
+
 }

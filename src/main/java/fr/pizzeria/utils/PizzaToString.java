@@ -12,6 +12,10 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public abstract class PizzaToString {
+	
+	private PizzaToString() {
+		super();
+	}
 
 	/**
 	 * Séparateur pour le stockage dans le fichier
@@ -38,7 +42,7 @@ public abstract class PizzaToString {
 					Object value = f.get(pizza);
 					chaine.append(annotation.before());
 					if (annotation.format()) { // l'attribut prix a besoin d'un formatage
-						chaine.append(formatter.format(value).toString());
+						chaine.append(formatter.format(value));
 					} else if (annotation.categorie()) { // l'attribut catégorie a besoin d'appeler getValue()
 						chaine.append(((CategoriePizza) value).getValue());
 					} else {
