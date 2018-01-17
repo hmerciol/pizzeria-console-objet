@@ -28,6 +28,9 @@ public class PizzaDaoDB implements IPizzaDao {
 	 */
 	private Connection databaseConnection;
 
+	/**
+	 * Nom de la structure dans la base de données
+	 */
 	private String dataSchema;
 
 	/**
@@ -75,15 +78,25 @@ public class PizzaDaoDB implements IPizzaDao {
 	}
 
 	/**
+	 * Pour bloquer une méthode si la base n'est pas connectée
+	 * 
+	 * @throws StockageException
+	 *             Si non connectée
+	 */
+	private void connectionTest() throws StockageException {
+		if (databaseConnection == null) {
+			throw new StockageException("La base de données n'est pas connectée");
+		}
+	}
+
+	/**
 	 * Récupère le tableau des pizzas stocké en BDD
 	 * 
 	 * @throws StockageException
 	 *             En cas de problème lors de l'accès à la BDD
 	 */
 	private List<Pizza> getFromDB() throws StockageException {
-		if (databaseConnection == null) {
-			throw new StockageException("La base de données n'est pas connectée");
-		}
+		connectionTest();
 
 		List<Pizza> menuPizzas = new ArrayList<>();
 
@@ -107,9 +120,8 @@ public class PizzaDaoDB implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws StockageException {
-		if (databaseConnection == null) {
-			throw new StockageException("La base de données n'est pas connectée");
-		}
+		connectionTest();
+		
 		if (!PizzaValidator.pizzaValide(pizza)) {
 			throw new SavePizzaException("Pizza non valide");
 		}
@@ -129,9 +141,8 @@ public class PizzaDaoDB implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) throws StockageException {
-		if (databaseConnection == null) {
-			throw new StockageException("La base de données n'est pas connectée");
-		}
+		connectionTest();
+		
 		if (!PizzaValidator.pizzaValide(pizza)) {
 			throw new UpdatePizzaException("Pizza non valide");
 		}
@@ -152,9 +163,7 @@ public class PizzaDaoDB implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) throws StockageException {
-		if (databaseConnection == null) {
-			throw new StockageException("La base de données n'est pas connectée");
-		}
+		connectionTest();
 
 		String query = "DELETE FROM " + dataSchema + ".pizza WHERE pizza_code = ?;";
 		try (PreparedStatement statement = databaseConnection.prepareStatement(query)) {

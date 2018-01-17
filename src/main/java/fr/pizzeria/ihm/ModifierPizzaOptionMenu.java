@@ -14,6 +14,8 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public class ModifierPizzaOptionMenu extends OptionMenu {
+	
+	private static final String USER_TRACE = "Commande utilisateur : ";
 
 	public ModifierPizzaOptionMenu(Scanner scan, IPizzaDao dao) {
 		super(scan, dao);
@@ -27,23 +29,23 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		LOG.info("(99 pour abandonner).");
 
 		String codeOld = scan.next();
-		TRACE.debug("Commande utilisateur : " + codeOld);
+		TRACE.debug(USER_TRACE + codeOld);
 
 		if (codeOld.equals("99"))
 			return;
 
 		LOG.info("Veuillez saisir le code");
 		String code = scan.next();
-		TRACE.debug("Commande utilisateur : " + code);
+		TRACE.debug(USER_TRACE + code);
 		LOG.info("Veuillez saisir le nom (sans espace)");
 		String nom = scan.next();
-		TRACE.debug("Commande utilisateur : " + nom);
+		TRACE.debug(USER_TRACE + nom);
 		LOG.info("Veuillez saisir la catégorie (avec \'_\' pour les espaces)");
 		String categorie = scan.next();
-		TRACE.debug("Commande utilisateur : " + categorie);
+		TRACE.debug(USER_TRACE + categorie);
 		LOG.info("Veuillez saisir le prix");
 		double prix = Double.parseDouble(scan.next());
-		TRACE.debug("Commande utilisateur : " + prix);
+		TRACE.debug(USER_TRACE + prix);
 
 		dao.updatePizza(codeOld, new Pizza(code, nom, prix, CategoriePizza.valueOf(categorie.toUpperCase())));
 	}

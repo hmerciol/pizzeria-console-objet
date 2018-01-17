@@ -19,7 +19,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	/**
 	 * Liste des pizzas du menu
 	 */
-	List<Pizza> menuPizzas = new ArrayList<Pizza>();
+	List<Pizza> menuPizzas = new ArrayList<>();
 
 	@Override
 	public List<Pizza> findAllPizzas() throws StockageException {

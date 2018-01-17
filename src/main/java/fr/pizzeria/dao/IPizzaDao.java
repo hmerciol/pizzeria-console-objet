@@ -33,6 +33,7 @@ public interface IPizzaDao {
 		case "jpa":
 			pizzaDao = new PizzaDaoJpa();
 			break;
+		default:
 		}
 		return pizzaDao;
 	}
