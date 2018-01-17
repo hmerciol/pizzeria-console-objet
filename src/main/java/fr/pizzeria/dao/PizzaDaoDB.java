@@ -87,17 +87,14 @@ public class PizzaDaoDB implements IPizzaDao {
 
 		List<Pizza> menuPizzas = new ArrayList<>();
 
-		try (Statement statement = databaseConnection.createStatement()) {
-			try (ResultSet results = statement.executeQuery("SELECT * FROM " + dataSchema + ".pizza;")) {
-				while (results.next()) {
-					menuPizzas.add(new Pizza(results.getString("pizza_code"), results.getString("pizza_nom"),
-							results.getFloat("pizza_prix"),
-							CategoriePizza.valueOf(results.getString("pizza_categorie"))));
-				}
+		try (Statement statement = databaseConnection.createStatement();
+				ResultSet results = statement.executeQuery("SELECT * FROM " + dataSchema + ".pizza;")) {
+			while (results.next()) {
+				menuPizzas.add(new Pizza(results.getString("pizza_code"), results.getString("pizza_nom"),
+						results.getFloat("pizza_prix"), CategoriePizza.valueOf(results.getString("pizza_categorie"))));
 			}
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la connection à la base de données");
-
 		}
 
 		return menuPizzas;
@@ -127,7 +124,6 @@ public class PizzaDaoDB implements IPizzaDao {
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de l'ajout d'une pizza à la base de données");
-
 		}
 	}
 
@@ -151,7 +147,6 @@ public class PizzaDaoDB implements IPizzaDao {
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la mise à jour d'une pizza dans la base de données");
-
 		}
 	}
 
@@ -167,7 +162,6 @@ public class PizzaDaoDB implements IPizzaDao {
 			statement.executeQuery();
 		} catch (SQLException e) {
 			throw new StockageException("Problème lors de la suppression d'une pizza à la base de données");
-
 		}
 	}
 
