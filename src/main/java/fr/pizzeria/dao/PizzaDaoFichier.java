@@ -38,7 +38,6 @@ public class PizzaDaoFichier extends PizzaDaoImpl {
 			while (line != null) { // parse chaque ligne pour créer une Pizza et l'ajouter à la liste
 				String[] data = line.split(PizzaToString.getSeparator());
 				if (data.length != 4) {
-					input.close();
 					throw new IOException("ici");
 				}
 				menuPizzas
